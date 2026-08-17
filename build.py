@@ -32,8 +32,8 @@ SITE_EN = "Korea AI Ethics Committee"
 EMAIL = "kaiec.korea@gmail.com"                # ← 대표 문의 메일
 # 위원 지원서 구글폼 — 바꾸려면 이 주소만 교체 후 python3 build.py 재실행
 GOOGLE_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSezVLiJJVsieoUS2gLRt2Y22MmwhO3MtWevR-tPaJPmoYra4Q/viewform"
-# 카피클린 공식 사이트
-COPYCLEAN_URL = "https://skkc.co.kr"
+# 카피클린 문서검사 바로가기 (모든 카피클린 CTA가 이 주소로 연결됨)
+COPYCLEAN_URL = "https://skkc.co.kr/shop_view?idx=6"
 
 # =============================================================================
 #  소식 게시판 (블로그) 엔진
@@ -226,7 +226,7 @@ def header():
       {BRAND}
       <nav class="nav" id="nav">
           {links}
-          <span class="header-cta"><a class="btn btn-primary btn-sm" href="apply.html">위원 지원</a><a class="btn btn-teal btn-sm" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">문서 검사</a></span>
+          <span class="header-cta"><a class="btn btn-primary btn-sm" href="{GOOGLE_FORM}" target="_blank" rel="noopener">위원 지원</a><a class="btn btn-teal btn-sm" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">문서 검사</a></span>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
         <i data-lucide="menu"></i>
@@ -243,7 +243,7 @@ def footer():
       <div class="footer-top">
         <div class="footer-brand">
           {BRAND}
-          <p class="footer-desc">생성형 AI 시대의 책임 있는 AI 활용과 건전한 AI 윤리 문화 확산을 위해 교육·연구·캠페인·대외협력 활동을 수행하는 민간 자율 위원회입니다.</p>
+          <p class="footer-desc">생성형 AI 시대의 책임 있는 AI 활용과 건전한 AI 윤리 문화 확산을 위해 교육·연구·캠페인·대외협력 활동을 수행하는 AI 윤리 전문 위원회입니다.</p>
         </div>
         <div class="footer-col">
           <h4>위원회</h4>
@@ -396,7 +396,7 @@ def build_index(posts):
 
     body = f"""    <section class="hero">
       <div class="wrap hero-inner">
-        <span class="hero-badge"><span class="dot"></span>Korea AI Ethics Committee · 민간 자율 위원회</span>
+        <span class="hero-badge"><span class="dot"></span>KAIEC · Korea AI Ethics Committee</span>
         <h1>AI를 잘 쓰는 것보다<br><span class="accent">책임 있게 쓰는 것</span>이 먼저입니다</h1>
         <p>한국AI윤리위원회는 생성형 AI 시대의 책임 있는 AI 활용과 건전한 AI 윤리 문화 확산을 위해
            교육·연구·캠페인·대외협력 활동을 수행합니다.</p>
@@ -529,7 +529,7 @@ def build_index(posts):
             <p>전문위원 · 활동위원 · AI 윤리 파트너 상시 모집 중입니다. 온라인으로 간편하게 지원하실 수 있습니다.</p>
           </div>
           <div class="btns">
-            <a class="btn btn-white" href="apply.html">위원 지원하기</a>
+            <a class="btn btn-white" href="{GOOGLE_FORM}" target="_blank" rel="noopener">위원 지원하기</a>
             <a class="btn btn-light" href="lecture.html">강의·교육 신청</a>
             <a class="btn btn-light" href="mou.html#inquiry">제휴 문의</a>
           </div>
@@ -539,7 +539,7 @@ def build_index(posts):
 
     page("index.html",
          f"{SITE_NAME} | 책임 있는 AI 활용과 AI 윤리 문화 확산",
-         "한국AI윤리위원회는 생성형 AI 시대의 책임 있는 AI 활용과 건전한 AI 윤리 문화 확산을 위해 교육·연구·캠페인·대외협력 및 AI 윤리 파트너 활동을 추진하는 민간 자율 위원회입니다.",
+         "한국AI윤리위원회는 생성형 AI 시대의 책임 있는 AI 활용과 건전한 AI 윤리 문화 확산을 위해 교육·연구·캠페인·대외협력 및 AI 윤리 파트너 활동을 추진하는 AI 윤리 전문 위원회입니다.",
          body)
 
 
@@ -575,7 +575,7 @@ def build_about():
             사회적 기준은 아직 충분히 자리 잡지 못했습니다. 기준의 공백은 두 가지 그림자를 남깁니다.
             AI를 활용하고도 떳떳하게 밝히지 못하는 문화, 그리고 막연한 불안 속에 정당한 활용마저
             주저하게 되는 위축이 그것입니다.</p>
-            <p>한국AI윤리위원회는 이 공백을 메우고자 뜻을 모은 <strong>민간 자율 기구</strong>입니다.
+            <p>한국AI윤리위원회는 이 공백을 메우고자 뜻을 모은 <strong>AI 윤리 전문 기구</strong>입니다.
             우리는 규제와 처벌이 아니라, AI를 쓰는 사람이라면 누구나 스스로 지킬 수 있는
             기준과 문화의 힘을 믿습니다. 제출 전에 한 번 더 점검하고, 활용했다면 숨기지 않고 밝히며,
             결과에 책임지는 태도 — 그 작은 실천들이 모여 신뢰할 수 있는 AI 시대를 만든다고 확신합니다.</p>
@@ -608,7 +608,7 @@ def build_about():
         <p class="lead">
           한국AI윤리위원회는 이 공백을 메우기 위해 출발했습니다. 규제하거나 처벌하는 기구가 아니라,
           AI를 쓰는 사람들이 <strong>스스로 지킬 수 있는 기준</strong>을 정리하고 알리며,
-          함께 실천할 사람들을 모으는 민간 자율 기구입니다.
+          함께 실천할 사람들을 모으는 자율 위원회입니다.
         </p>
       </div>
     </section>
@@ -684,7 +684,7 @@ def build_about():
               <table class="tbl" style="min-width:auto">
                 <tbody>
                   <tr><th style="width:34%">명칭</th><td>한국AI윤리위원회<br><span style="color:var(--gray-500);font-size:13.5px">Korea AI Ethics Committee (KAIEC)</span></td></tr>
-                  <tr><th>성격</th><td>민간 전문 위원회</td></tr>
+                  <tr><th>성격</th><td>AI 윤리 전문 위원회</td></tr>
                   <tr><th>목적</th><td>책임 있는 생성형 AI 활용 및 AI 윤리 문화 확산</td></tr>
                   <tr><th>주요 활동</th><td>교육 · 연구 · 캠페인 · 대외협력 · AI 윤리 파트너 운영</td></tr>
                   <tr><th>운영 방식</th><td>온라인 기반 (위원·파트너 활동 재택 가능)</td></tr>
@@ -821,7 +821,7 @@ def build_business():
 def build_members():
     body = hero_sub("조직 · 위원",
                     "위원장, 운영진, 전문위원, 활동위원이 각자의 전문성을 바탕으로 위원회 활동을 함께 만들어갑니다.",
-                    "조직 · 위원") + """
+                    "조직 · 위원") + f"""
 
     <section class="section">
       <div class="wrap">
@@ -1004,7 +1004,7 @@ def build_members():
         <div class="cta-band">
           <div><h2>위원으로 함께하시겠습니까?</h2>
             <p>전문위원 · 활동위원을 상시 모집합니다. 전공과 경력에 관계없이 지원하실 수 있습니다.</p></div>
-          <div class="btns"><a class="btn btn-white" href="apply.html">위원 지원하기</a></div>
+          <div class="btns"><a class="btn btn-white" href="{GOOGLE_FORM}" target="_blank" rel="noopener">위원 지원하기</a><a class="btn btn-light" href="apply.html">모집 안내</a></div>
         </div>
       </div>
     </section>"""
@@ -1077,10 +1077,14 @@ def build_partner():
           AI 윤리는 전문가 몇 명이 만드는 것이 아니라, AI를 실제로 사용하는 사람들이 함께 만들어가는 것입니다.
           AI 윤리 파트너는 그 확산을 현장에서 담당하는 위원회의 파트너입니다.
         </p>
+        <div style="display:flex;gap:11px;justify-content:center;flex-wrap:wrap;margin-top:28px">
+          <a class="btn btn-primary" href="{GOOGLE_FORM}" target="_blank" rel="noopener">파트너 지원하기 <i data-lucide="external-link"></i></a>
+          <a class="btn btn-ghost" href="#apply-info">활동·혜택 먼저 보기</a>
+        </div>
       </div>
     </section>
 
-    <section class="section section--gray section--tight">
+    <section class="section section--gray section--tight" id="apply-info">
       <div class="wrap">
         <div class="grid grid-4">
           <div class="card reveal center"><div class="card-icon" style="margin:0 auto 16px"><i data-lucide="wifi"></i></div>
@@ -1209,7 +1213,7 @@ def build_partner():
           <div><h2>AI 윤리 파트너로 함께해 주세요</h2>
             <p>온라인으로 간편하게 지원하실 수 있습니다. 궁금한 점은 언제든 문의해 주세요.</p></div>
           <div class="btns">
-            <a class="btn btn-white" href="apply.html">파트너 지원하기</a>
+            <a class="btn btn-white" href="{GOOGLE_FORM}" target="_blank" rel="noopener">파트너 지원하기</a>
             <a class="btn btn-light" href="mailto:{EMAIL}">문의하기</a>
           </div>
         </div>
@@ -1332,7 +1336,7 @@ def build_copyclean():
               <tr><th style="width:22%">구분</th><th>한국AI윤리위원회</th><th>카피클린 (CopyClean)</th></tr>
             </thead>
             <tbody>
-              <tr><th>성격</th><td>민간 자율 위원회</td><td>AI 문서 분석 서비스</td></tr>
+              <tr><th>성격</th><td>AI 윤리 전문 위원회</td><td>AI 문서 분석 서비스</td></tr>
               <tr><th>역할</th><td>AI 윤리 문화 확산, 교육·연구·캠페인, 대외협력</td><td>문서의 AI 활용 여부 사전 확인 지원</td></tr>
               <tr><th>관계</th><td colspan="2" style="text-align:center;font-weight:700;color:var(--blue)">캠페인·제휴 활동을 함께하는 협력 파트너</td></tr>
               <tr><th>대상</th><td>개인 · 대학 · 기업 · 협회 등</td><td>논문 · 과제 · 보고서 · 자기소개서 등 문서</td></tr>
@@ -1460,7 +1464,7 @@ def build_post(p, posts):
           <div><h2>한국AI윤리위원회와 함께하세요</h2>
             <p>위원 · AI 윤리 파트너 모집, 강의·교육 신청, 기관 제휴 문의를 환영합니다.</p></div>
           <div class="btns">
-            <a class="btn btn-white" href="apply.html">위원 지원</a>
+            <a class="btn btn-white" href="{GOOGLE_FORM}" target="_blank" rel="noopener">위원 지원</a>
             <a class="btn btn-light" href="lecture.html">강의 신청</a>
           </div>
         </div>
@@ -1617,61 +1621,25 @@ def build_mou():
               <input type="text" id="org" name="기관명" required placeholder="예) ○○대학교 ○○학과">
             </div>
             <div class="field">
-              <label for="type">기관 유형<span class="req">*</span></label>
-              <select id="type" name="기관유형" required>
-                <option value="">선택해 주세요</option>
-                <option>대학 · 학과</option><option>기업</option><option>협회 · 단체</option>
-                <option>연구기관</option><option>기타</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
               <label for="name">담당자 성함<span class="req">*</span></label>
               <input type="text" id="name" name="담당자" required>
             </div>
-            <div class="field">
-              <label for="pos">직위 · 부서</label>
-              <input type="text" id="pos" name="직위부서" placeholder="예) 학생처 주임">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="email">이메일<span class="req">*</span></label>
-              <input type="email" id="email" name="이메일" required placeholder="name@example.com">
-            </div>
-            <div class="field">
-              <label for="tel">연락처</label>
-              <input type="tel" id="tel" name="연락처" placeholder="010-0000-0000">
-            </div>
           </div>
           <div class="field">
-            <label for="interest">희망 협력 분야</label>
-            <select id="interest" name="희망협력분야">
-              <option value="">선택해 주세요</option>
-              <option>AI 윤리 교육 · 특강</option>
-              <option>공동 캠페인</option>
-              <option>AI 활용 가이드라인 자문</option>
-              <option>사전점검 문화 확산 캠페인</option>
-              <option>연구 · 정책 협력</option>
-              <option>기타</option>
-            </select>
+            <label for="contact">연락처<span class="req">*</span></label>
+            <input type="text" id="contact" name="연락처" required placeholder="전화번호 또는 이메일">
+            <p class="field-hint">회신받으실 연락처 하나만 남겨주시면 됩니다.</p>
           </div>
           <div class="field">
             <label for="msg">문의 내용<span class="req">*</span></label>
-            <textarea id="msg" name="문의내용" required placeholder="협력을 희망하시는 내용과 일정 등을 자유롭게 적어 주세요."></textarea>
+            <textarea id="msg" name="문의내용" required placeholder="협력을 희망하시는 내용을 자유롭게 적어 주세요."></textarea>
           </div>
-          <label class="checkline">
-            <input type="checkbox" required>
-            <span>문의 처리를 위한 개인정보(기관명, 담당자명, 연락처, 이메일) 수집·이용에 동의합니다.
-              수집된 정보는 문의 응대 목적으로만 사용하며, 처리 완료 후 파기합니다.</span>
-          </label>
           <button type="submit" class="btn btn-primary" style="justify-self:start">
-            이메일로 제휴 문의 보내기 <i data-lucide="send"></i>
+            제휴 문의 보내기 <i data-lucide="send"></i>
           </button>
           <p class="field-hint">
-            버튼을 누르면 사용 중인 메일 앱이 열리고 작성하신 내용이 자동으로 담깁니다.
-            전송이 어려우신 경우 <a href="mailto:{EMAIL}" style="color:var(--blue);font-weight:600">{EMAIL}</a> 로 직접 보내주셔도 됩니다.
+            버튼을 누르면 메일 앱이 열리고 작성 내용이 자동으로 담깁니다.
+            직접 보내실 경우: <a href="mailto:{EMAIL}" style="color:var(--blue);font-weight:600">{EMAIL}</a>
           </p>
         </form>
       </div>
@@ -1699,14 +1667,11 @@ def build_mou():
     f.addEventListener('submit',function(e){
       e.preventDefault();
       function v(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():''}
-      var subject='[제휴·MOU 문의] '+v('기관명')+(v('기관유형')?' ('+v('기관유형')+')':'');
+      var subject='[제휴·MOU 문의] '+v('기관명');
       var lines=[
         '■ 기관·기업명 : '+v('기관명'),
-        '■ 기관 유형   : '+v('기관유형'),
-        '■ 담당자      : '+v('담당자')+(v('직위부서')?' / '+v('직위부서'):''),
-        '■ 이메일      : '+v('이메일'),
+        '■ 담당자      : '+v('담당자'),
         '■ 연락처      : '+v('연락처'),
-        '■ 희망 협력 분야 : '+v('희망협력분야'),
         '',
         '■ 문의 내용',
         v('문의내용'),
@@ -1870,36 +1835,16 @@ def build_lecture():
               <input type="text" id="l-org" name="기관명" required placeholder="예) ○○대학교 교육혁신원">
             </div>
             <div class="field">
-              <label for="l-type">기관 유형<span class="req">*</span></label>
-              <select id="l-type" name="기관유형" required>
-                <option value="">선택해 주세요</option>
-                <option>대학 · 대학원</option><option>기업</option><option>공공기관 · 지자체</option>
-                <option>정부지원사업 운영기관</option><option>초·중·고 · 교육청</option>
-                <option>학회 · 협회 · 단체</option><option>기타</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
               <label for="l-name">담당자 성함<span class="req">*</span></label>
               <input type="text" id="l-name" name="담당자" required>
             </div>
-            <div class="field">
-              <label for="l-pos">직위 · 부서</label>
-              <input type="text" id="l-pos" name="직위부서" placeholder="예) 교육운영팀 주임">
-            </div>
           </div>
           <div class="form-row">
             <div class="field">
-              <label for="l-email">이메일<span class="req">*</span></label>
-              <input type="email" id="l-email" name="이메일" required placeholder="name@example.com">
+              <label for="l-contact">연락처<span class="req">*</span></label>
+              <input type="text" id="l-contact" name="연락처" required placeholder="전화번호 또는 이메일">
+              <p class="field-hint">회신받으실 연락처 하나만 남겨주시면 됩니다.</p>
             </div>
-            <div class="field">
-              <label for="l-tel">연락처<span class="req">*</span></label>
-              <input type="tel" id="l-tel" name="연락처" required placeholder="010-0000-0000">
-            </div>
-          </div>
-          <div class="form-row">
             <div class="field">
               <label for="l-topic">희망 강의 분야<span class="req">*</span></label>
               <select id="l-topic" name="희망강의분야" required>
@@ -1913,39 +1858,17 @@ def build_lecture():
                 <option>맞춤 과정 (협의)</option>
               </select>
             </div>
-            <div class="field">
-              <label for="l-format">진행 방식</label>
-              <select id="l-format" name="진행방식">
-                <option value="">선택해 주세요</option>
-                <option>대면</option><option>온라인 (실시간)</option><option>온라인 (녹화)</option><option>혼합</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="l-date">희망 일정</label>
-              <input type="text" id="l-date" name="희망일정" placeholder="예) 2026년 10월 중, 협의 가능">
-            </div>
-            <div class="field">
-              <label for="l-count">예상 인원</label>
-              <input type="text" id="l-count" name="예상인원" placeholder="예) 80명 내외">
-            </div>
           </div>
           <div class="field">
-            <label for="l-msg">요청 사항</label>
-            <textarea id="l-msg" name="요청사항" placeholder="교육 대상, 기대하는 내용, 예산 범위 등 참고할 내용을 자유롭게 적어 주세요."></textarea>
+            <label for="l-msg">요청 사항 (선택)</label>
+            <textarea id="l-msg" name="요청사항" style="min-height:100px" placeholder="희망 일정, 예상 인원, 진행 방식 등을 간단히 적어주셔도 좋습니다."></textarea>
           </div>
-          <label class="checkline">
-            <input type="checkbox" required>
-            <span>문의 처리를 위한 개인정보(기관명, 담당자명, 연락처, 이메일) 수집·이용에 동의합니다.
-              수집된 정보는 강의 협의 목적으로만 사용하며, 처리 완료 후 파기합니다.</span>
-          </label>
           <button type="submit" class="btn btn-primary" style="justify-self:start">
-            이메일로 강의 신청 보내기 <i data-lucide="send"></i>
+            강의 신청 보내기 <i data-lucide="send"></i>
           </button>
           <p class="field-hint">
-            버튼을 누르면 사용 중인 메일 앱이 열리고 작성하신 내용이 자동으로 담깁니다.
-            전송이 어려우신 경우 <a href="mailto:{EMAIL}" style="color:var(--blue);font-weight:600">{EMAIL}</a> 로 직접 보내주셔도 됩니다.
+            버튼을 누르면 메일 앱이 열리고 작성 내용이 자동으로 담깁니다.
+            직접 보내실 경우: <a href="mailto:{EMAIL}" style="color:var(--blue);font-weight:600">{EMAIL}</a>
           </p>
         </form>
       </div>
@@ -1990,14 +1913,9 @@ def build_lecture():
       var subject='[강의 신청] '+v('기관명')+' — '+v('희망강의분야');
       var lines=[
         '■ 기관·기업명 : '+v('기관명'),
-        '■ 기관 유형   : '+v('기관유형'),
-        '■ 담당자      : '+v('담당자')+(v('직위부서')?' / '+v('직위부서'):''),
-        '■ 이메일      : '+v('이메일'),
+        '■ 담당자      : '+v('담당자'),
         '■ 연락처      : '+v('연락처'),
         '■ 희망 강의 분야 : '+v('희망강의분야'),
-        '■ 진행 방식   : '+v('진행방식'),
-        '■ 희망 일정   : '+v('희망일정'),
-        '■ 예상 인원   : '+v('예상인원'),
         '',
         '■ 요청 사항',
         v('요청사항'),

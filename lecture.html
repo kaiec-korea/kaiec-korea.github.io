@@ -26,7 +26,7 @@
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=202608170525">
+<link rel="stylesheet" href="assets/css/style.css?v=202608170538">
 <script>document.documentElement.className+=' js';</script>
 </head>
 <body>
@@ -37,7 +37,7 @@
         <span class="topbar-right">
           <a href="mailto:kaiec.korea@gmail.com">kaiec.korea@gmail.com</a><span class="tsep">|</span>
           <a href="apply.html">위원 지원</a><span class="tsep">|</span>
-          <a href="https://skkc.co.kr" target="_blank" rel="noopener" style="color:#6FE3D8">카피클린</a><span class="tsep">|</span>
+          <a href="https://skkc.co.kr/shop_view?idx=6" target="_blank" rel="noopener" style="color:#6FE3D8">카피클린</a><span class="tsep">|</span>
           <a href="mou.html#inquiry">제휴·MOU 문의</a>
         </span>
       </div>
@@ -59,7 +59,7 @@
           <a href="copyclean.html">카피클린</a>
           <a href="news.html">캠페인·소식</a>
           <a href="mou.html">MOU·대외협력</a>
-          <span class="header-cta"><a class="btn btn-primary btn-sm" href="apply.html">위원 지원</a><a class="btn btn-teal btn-sm" href="https://skkc.co.kr" target="_blank" rel="noopener">문서 검사</a></span>
+          <span class="header-cta"><a class="btn btn-primary btn-sm" href="https://docs.google.com/forms/d/e/1FAIpQLSezVLiJJVsieoUS2gLRt2Y22MmwhO3MtWevR-tPaJPmoYra4Q/viewform" target="_blank" rel="noopener">위원 지원</a><a class="btn btn-teal btn-sm" href="https://skkc.co.kr/shop_view?idx=6" target="_blank" rel="noopener">문서 검사</a></span>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /> <path d="M4 12h16" /> <path d="M4 19h16" /></svg>
@@ -236,36 +236,16 @@
               <input type="text" id="l-org" name="기관명" required placeholder="예) ○○대학교 교육혁신원">
             </div>
             <div class="field">
-              <label for="l-type">기관 유형<span class="req">*</span></label>
-              <select id="l-type" name="기관유형" required>
-                <option value="">선택해 주세요</option>
-                <option>대학 · 대학원</option><option>기업</option><option>공공기관 · 지자체</option>
-                <option>정부지원사업 운영기관</option><option>초·중·고 · 교육청</option>
-                <option>학회 · 협회 · 단체</option><option>기타</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
               <label for="l-name">담당자 성함<span class="req">*</span></label>
               <input type="text" id="l-name" name="담당자" required>
             </div>
-            <div class="field">
-              <label for="l-pos">직위 · 부서</label>
-              <input type="text" id="l-pos" name="직위부서" placeholder="예) 교육운영팀 주임">
-            </div>
           </div>
           <div class="form-row">
             <div class="field">
-              <label for="l-email">이메일<span class="req">*</span></label>
-              <input type="email" id="l-email" name="이메일" required placeholder="name@example.com">
+              <label for="l-contact">연락처<span class="req">*</span></label>
+              <input type="text" id="l-contact" name="연락처" required placeholder="전화번호 또는 이메일">
+              <p class="field-hint">회신받으실 연락처 하나만 남겨주시면 됩니다.</p>
             </div>
-            <div class="field">
-              <label for="l-tel">연락처<span class="req">*</span></label>
-              <input type="tel" id="l-tel" name="연락처" required placeholder="010-0000-0000">
-            </div>
-          </div>
-          <div class="form-row">
             <div class="field">
               <label for="l-topic">희망 강의 분야<span class="req">*</span></label>
               <select id="l-topic" name="희망강의분야" required>
@@ -279,39 +259,17 @@
                 <option>맞춤 과정 (협의)</option>
               </select>
             </div>
-            <div class="field">
-              <label for="l-format">진행 방식</label>
-              <select id="l-format" name="진행방식">
-                <option value="">선택해 주세요</option>
-                <option>대면</option><option>온라인 (실시간)</option><option>온라인 (녹화)</option><option>혼합</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="l-date">희망 일정</label>
-              <input type="text" id="l-date" name="희망일정" placeholder="예) 2026년 10월 중, 협의 가능">
-            </div>
-            <div class="field">
-              <label for="l-count">예상 인원</label>
-              <input type="text" id="l-count" name="예상인원" placeholder="예) 80명 내외">
-            </div>
           </div>
           <div class="field">
-            <label for="l-msg">요청 사항</label>
-            <textarea id="l-msg" name="요청사항" placeholder="교육 대상, 기대하는 내용, 예산 범위 등 참고할 내용을 자유롭게 적어 주세요."></textarea>
+            <label for="l-msg">요청 사항 (선택)</label>
+            <textarea id="l-msg" name="요청사항" style="min-height:100px" placeholder="희망 일정, 예상 인원, 진행 방식 등을 간단히 적어주셔도 좋습니다."></textarea>
           </div>
-          <label class="checkline">
-            <input type="checkbox" required>
-            <span>문의 처리를 위한 개인정보(기관명, 담당자명, 연락처, 이메일) 수집·이용에 동의합니다.
-              수집된 정보는 강의 협의 목적으로만 사용하며, 처리 완료 후 파기합니다.</span>
-          </label>
           <button type="submit" class="btn btn-primary" style="justify-self:start">
-            이메일로 강의 신청 보내기 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></svg>
+            강의 신청 보내기 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></svg>
           </button>
           <p class="field-hint">
-            버튼을 누르면 사용 중인 메일 앱이 열리고 작성하신 내용이 자동으로 담깁니다.
-            전송이 어려우신 경우 <a href="mailto:kaiec.korea@gmail.com" style="color:var(--blue);font-weight:600">kaiec.korea@gmail.com</a> 로 직접 보내주셔도 됩니다.
+            버튼을 누르면 메일 앱이 열리고 작성 내용이 자동으로 담깁니다.
+            직접 보내실 경우: <a href="mailto:kaiec.korea@gmail.com" style="color:var(--blue);font-weight:600">kaiec.korea@gmail.com</a>
           </p>
         </form>
       </div>
@@ -341,7 +299,7 @@
           <span class="brand-en">Korea AI Ethics Committee</span>
         </span>
       </a>
-          <p class="footer-desc">생성형 AI 시대의 책임 있는 AI 활용과 건전한 AI 윤리 문화 확산을 위해 교육·연구·캠페인·대외협력 활동을 수행하는 민간 자율 위원회입니다.</p>
+          <p class="footer-desc">생성형 AI 시대의 책임 있는 AI 활용과 건전한 AI 윤리 문화 확산을 위해 교육·연구·캠페인·대외협력 활동을 수행하는 AI 윤리 전문 위원회입니다.</p>
         </div>
         <div class="footer-col">
           <h4>위원회</h4>
@@ -377,7 +335,7 @@
       </div>
     </div>
   </footer>
-  <script src="assets/js/main.js?v=202608170525"></script>
+  <script src="assets/js/main.js?v=202608170538"></script>
   <script src="assets/js/members-data.js"></script>
   <script>
   /* 강사진 — 조직·위원 데이터의 '전문위원'을 자동으로 표시합니다 */
@@ -404,14 +362,9 @@
       var subject='[강의 신청] '+v('기관명')+' — '+v('희망강의분야');
       var lines=[
         '■ 기관·기업명 : '+v('기관명'),
-        '■ 기관 유형   : '+v('기관유형'),
-        '■ 담당자      : '+v('담당자')+(v('직위부서')?' / '+v('직위부서'):''),
-        '■ 이메일      : '+v('이메일'),
+        '■ 담당자      : '+v('담당자'),
         '■ 연락처      : '+v('연락처'),
         '■ 희망 강의 분야 : '+v('희망강의분야'),
-        '■ 진행 방식   : '+v('진행방식'),
-        '■ 희망 일정   : '+v('희망일정'),
-        '■ 예상 인원   : '+v('예상인원'),
         '',
         '■ 요청 사항',
         v('요청사항'),
