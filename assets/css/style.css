@@ -566,6 +566,73 @@ table.tbl tr:hover td{background:#FCFDFF}
 .post-tags .chip{background:var(--blue-050);color:var(--blue-600)}
 .post-nav{display:flex;justify-content:space-between;gap:12px;margin-top:34px;flex-wrap:wrap}
 
+/* ---------- 출강 교육 페이지 ---------- */
+.hl-pill{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;
+  background:rgba(255,255,255,.10);border:1px solid rgba(111,227,216,.45);
+  font-size:13.5px;font-weight:700;color:#8FE8DD;margin-bottom:20px;letter-spacing:-.01em;
+}
+.hl-pill svg,.hl-pill i{width:16px;height:16px;color:#6FE3D8}
+
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.price-card{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);
+  padding:30px 22px 26px;text-align:center;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);
+}
+.price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#C9D8F5}
+.price-hours{font-size:13.5px;font-weight:800;color:var(--blue);letter-spacing:.02em}
+.price-num{font-size:clamp(34px,3.6vw,44px);font-weight:800;color:var(--ink);letter-spacing:-.04em;margin:8px 0 4px;line-height:1.1}
+.price-num small{font-size:16px;font-weight:700;color:var(--gray-600);margin-left:2px;letter-spacing:0}
+.price-note{font-size:12.5px;color:var(--gray-500);font-weight:600;padding-top:10px;margin-top:10px;border-top:1px solid var(--gray-100)}
+
+.cu-card{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);
+  padding:26px 26px 24px;
+}
+.cu-head{display:flex;align-items:center;gap:13px;margin-bottom:16px;padding-bottom:15px;border-bottom:1px solid var(--gray-100)}
+.cu-num{
+  flex-shrink:0;font-size:13px;font-weight:800;color:#fff;background:var(--navy);
+  border-radius:8px;padding:8px 11px;letter-spacing:.05em;line-height:1;
+}
+.cu-title{flex:1}
+.cu-title h3{font-size:17px;letter-spacing:-.03em;line-height:1.35}
+.cu-tag{font-size:11.5px;color:var(--gray-500);font-weight:700;letter-spacing:.01em}
+.cu-icon{
+  flex-shrink:0;width:40px;height:40px;border-radius:11px;background:var(--blue-050);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+}
+.cu-icon svg,.cu-icon i{width:20px;height:20px}
+.cu-list{display:grid;gap:7px}
+.cu-list li{position:relative;padding-left:16px;font-size:13.8px;color:var(--gray-600);line-height:1.62}
+.cu-list li::before{content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--blue);opacity:.5}
+
+.combo{
+  display:block;font-size:13px;font-weight:700;color:var(--blue-600);background:var(--blue-050);
+  padding:9px 13px;border-radius:9px;line-height:1.6;margin:4px 0 13px;letter-spacing:-.01em;
+}
+
+.inst-card{
+  display:flex;gap:15px;align-items:center;background:#fff;border:1px solid var(--gray-200);
+  border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm);
+}
+.inst-avatar{
+  flex-shrink:0;width:52px;height:52px;border-radius:14px;background:var(--blue-050);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+}
+.inst-avatar svg,.inst-avatar i{width:25px;height:25px}
+.inst-avatar--teal{background:var(--teal-050);color:#00857A}
+.inst-deg{font-size:11.5px;font-weight:700;color:var(--gray-500);letter-spacing:.02em}
+.inst-deg strong{color:var(--blue)}
+.inst-name{font-size:17px;font-weight:800;letter-spacing:-.03em;margin:3px 0 2px}
+.inst-field{font-size:12.5px;color:var(--gray-500)}
+
+.small-contact{text-align:center;font-size:12.5px;color:var(--gray-400);margin-top:22px;letter-spacing:.01em}
+.small-contact a{color:var(--gray-500)}
+
+@media (max-width:860px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.price-grid{grid-template-columns:1fr}}
+
 /* ---------- 구글폼 임베드 ---------- */
 .gform-wrap{
   background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);

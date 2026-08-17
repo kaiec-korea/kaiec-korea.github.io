@@ -216,7 +216,7 @@ def header():
         <span class="topbar-left">KOREA AI ETHICS COMMITTEE</span>
         <span class="topbar-right">
           <a href="mailto:{EMAIL}">{EMAIL}</a><span class="tsep">|</span>
-          <a href="apply.html">위원 지원</a><span class="tsep">|</span>
+          <a href="apply.html">파트너 지원</a><span class="tsep">|</span>
           <a href="{COPYCLEAN_URL}" target="_blank" rel="noopener" style="color:#6FE3D8">카피클린</a><span class="tsep">|</span>
           <a href="mou.html#inquiry">제휴·MOU 문의</a>
         </span>
@@ -226,7 +226,7 @@ def header():
       {BRAND}
       <nav class="nav" id="nav">
           {links}
-          <span class="header-cta"><a class="btn btn-primary btn-sm" href="{GOOGLE_FORM}" target="_blank" rel="noopener">위원 지원</a><a class="btn btn-teal btn-sm" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">문서 검사</a></span>
+          <span class="header-cta"><a class="btn btn-primary btn-sm" href="{GOOGLE_FORM}" target="_blank" rel="noopener">파트너 지원</a><a class="btn btn-teal btn-sm" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">문서 검사</a></span>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
         <i data-lucide="menu"></i>
@@ -526,7 +526,7 @@ def build_index(posts):
         <div class="cta-band reveal">
           <div>
             <h2>AI 윤리 활동에 함께하실 분을 기다립니다</h2>
-            <p>전문위원 · 활동위원 · AI 윤리 파트너 상시 모집 중입니다. 온라인으로 간편하게 지원하실 수 있습니다.</p>
+            <p>전문위원 · AI 윤리 파트너 상시 모집 중입니다. 온라인으로 간편하게 지원하실 수 있습니다.</p>
           </div>
           <div class="btns">
             <a class="btn btn-white" href="{GOOGLE_FORM}" target="_blank" rel="noopener">위원 지원하기</a>
@@ -580,7 +580,7 @@ def build_about():
             기준과 문화의 힘을 믿습니다. 제출 전에 한 번 더 점검하고, 활용했다면 숨기지 않고 밝히며,
             결과에 책임지는 태도 — 그 작은 실천들이 모여 신뢰할 수 있는 AI 시대를 만든다고 확신합니다.</p>
             <p>위원회는 교육과 연구, 캠페인과 대외협력을 통해 이 실천을 넓혀가고자 합니다.
-            대학과 기업, 연구 현장의 목소리에 귀 기울이고, 전문위원과 활동위원, 그리고 전국의
+            대학과 기업, 연구 현장의 목소리에 귀 기울이고, 전문위원과 지역·캠퍼스 조직, 그리고 전국의
             AI 윤리 파트너와 함께 걸어가겠습니다.</p>
             <p>여러분의 관심과 참여가 건강한 AI 문화를 만드는 가장 큰 힘입니다.<br>감사합니다.</p>
           </div>
@@ -705,7 +705,7 @@ def build_about():
         <div class="cta-band">
           <div>
             <h2>위원회 활동에 참여하시겠습니까?</h2>
-            <p>전문위원 · 활동위원 · AI 윤리 파트너를 상시 모집하고 있습니다.</p>
+            <p>전문위원 · AI 윤리 파트너를 상시 모집하고 있습니다.</p>
           </div>
           <div class="btns"><a class="btn btn-white" href="apply.html">지원 안내 보기</a></div>
         </div>
@@ -820,7 +820,7 @@ def build_business():
 # -------------------------------------------------------------- members.html
 def build_members():
     body = hero_sub("조직 · 위원",
-                    "위원장, 운영진, 전문위원, 활동위원이 각자의 전문성을 바탕으로 위원회 활동을 함께 만들어갑니다.",
+                    "위원장, 운영진, 전문위원, AI 윤리 파트너가 각자의 전문성을 바탕으로 위원회 활동을 함께 만들어갑니다.",
                     "조직 · 위원") + f"""
 
     <section class="section">
@@ -828,8 +828,8 @@ def build_members():
         <div class="center" style="margin-bottom:46px">
           <span class="eyebrow">Organization Chart</span>
           <h2 class="h-sec">조직도</h2>
-          <p class="h-sub">위원회는 위원장을 중심으로 사무국과 6개 전문분과, 활동위원회를 두고,
-             전국 단위의 지역 운영위원회·캠퍼스 위원회와 AI 윤리 파트너 조직으로 구성됩니다.</p>
+          <p class="h-sub">위원회는 위원장을 중심으로 사무국과 6개 전문분과, 30명 규모의 AI 윤리 파트너를 두고,
+             전국 단위의 지역 운영위원회·캠퍼스 위원회로 확장되는 구조입니다.</p>
         </div>
 
         <div class="org-chart">
@@ -867,7 +867,7 @@ def build_members():
           <div class="oc-vline"></div>
           <div class="oc-hline"></div>
 
-          <!-- 3대 축: 사무국 / 전문위원회 / 활동위원회 -->
+          <!-- 3대 축: 사무국 / 전문위원회 / AI 윤리 파트너 -->
           <div class="oc-branches">
             <div class="oc-branch">
               <div class="oc-stub"></div>
@@ -900,15 +900,15 @@ def build_members():
             </div>
             <div class="oc-branch">
               <div class="oc-stub"></div>
-              <div class="oc-node oc-pillar oc-pillar--gray">
-                <div class="oc-tag" style="color:var(--gray-500)">ACTIVITY COMMITTEE</div>
-                <div class="oc-title">활동위원회</div>
-                <div class="oc-desc">현장 활동 조직</div>
+              <div class="oc-node oc-pillar oc-pillar--teal" style="border-top-color:var(--teal)">
+                <div class="oc-tag" style="color:#00857A">AI ETHICS PARTNERS</div>
+                <div class="oc-title">AI 윤리 파트너</div>
+                <div class="oc-desc">30명 · 온라인 전국 활동</div>
               </div>
               <div class="oc-childs">
-                <div class="oc-child">운영위원 <small>프로그램 운영 · 활동 관리</small></div>
-                <div class="oc-child">홍보위원단 <small>채널 홍보 · 콘텐츠 확산</small></div>
-                <div class="oc-child">서포터즈 <small>대학생·대학원생 참여 조직</small></div>
+                <div class="oc-child">캠페인 참여 <small>온라인 캠페인 · 확산 활동</small></div>
+                <div class="oc-child">콘텐츠 활동 <small>카드뉴스 · 영상 · 홍보</small></div>
+                <div class="oc-child">현장 소통 <small>대학 · 커뮤니티 알림</small></div>
               </div>
             </div>
           </div>
@@ -924,16 +924,6 @@ def build_members():
             </div>
           </div>
 
-          <div class="oc-vline"></div>
-
-          <!-- AI 윤리 파트너 -->
-          <div class="oc-band oc-band--accent">
-            <span class="badge badge--teal">온라인 · 전국</span>
-            <div>
-              <div class="oc-title">AI 윤리 파트너</div>
-              <div class="oc-desc">온라인·재택 기반으로 AI 윤리 문화 확산 활동에 참여하는 개방형 파트너 조직</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -1003,7 +993,7 @@ def build_members():
       <div class="wrap">
         <div class="cta-band">
           <div><h2>위원으로 함께하시겠습니까?</h2>
-            <p>전문위원 · 활동위원을 상시 모집합니다. 전공과 경력에 관계없이 지원하실 수 있습니다.</p></div>
+            <p>전문위원 · AI 윤리 파트너를 상시 모집합니다. 전공과 경력에 관계없이 지원하실 수 있습니다.</p></div>
           <div class="btns"><a class="btn btn-white" href="{GOOGLE_FORM}" target="_blank" rel="noopener">위원 지원하기</a><a class="btn btn-light" href="apply.html">모집 안내</a></div>
         </div>
       </div>
@@ -1014,7 +1004,7 @@ def build_members():
   (function(){
     var box=document.getElementById('memberSections');
     if(!box||!window.KAIEC_MEMBERS)return;
-    var groups=['위원장','부위원장','감사','고문·자문위원','운영위원','전문위원','지역 운영위원','캠퍼스 위원장','홍보위원','활동위원','서포터즈'];
+    var groups=['위원장','부위원장','감사','고문·자문위원','운영위원','전문위원','지역 운영위원','캠퍼스 위원장'];
     var html='';
     groups.forEach(function(g){
       var list=window.KAIEC_MEMBERS.filter(function(m){return m.group===g});
@@ -1035,12 +1025,25 @@ def build_members():
         }).join('')
         +'</div></div>';
     });
+    /* AI 윤리 파트너 — 인원수만 표시 (KAIEC_PARTNER_COUNT) */
+    var pc=window.KAIEC_PARTNER_COUNT||0;
+    if(pc){
+      html+='<div style="margin-bottom:10px">'
+        +'<h3 style="font-size:19px;margin-bottom:18px;display:flex;align-items:center;gap:10px">'
+        +'<span style="width:4px;height:19px;background:var(--teal);border-radius:2px"></span>AI 윤리 파트너'
+        +' <span style="font-size:13px;font-weight:600;color:var(--gray-500)">('+pc+'명)</span></h3>'
+        +'<div class="oc-band oc-band--accent" style="justify-content:flex-start;text-align:left">'
+        +'<span class="badge badge--teal">온라인 · 전국</span>'
+        +'<div><div class="oc-title">AI 윤리 파트너 '+pc+'명 활동 중</div>'
+        +'<div class="oc-desc">캠페인 · 콘텐츠 · 확산 활동에 참여합니다. 개별 명단은 기수별 위촉 완료 후 공개됩니다.</div></div>'
+        +'</div></div>';
+    }
     box.innerHTML=html||'<p style="text-align:center;color:var(--gray-500);padding:40px 0">위원 명단은 준비 중입니다.</p>';
   })();
   </script>
 """
     page("members.html", "조직 · 위원",
-         "한국AI윤리위원회의 조직 구성과 위원장·운영위원·전문위원·활동위원 명단, 직책 및 전문분야를 안내합니다.",
+         "한국AI윤리위원회의 조직 구성과 위원장·운영위원·전문위원 명단, AI 윤리 파트너 현황을 안내합니다.",
          body, extra_script=script)
 
 
@@ -1690,103 +1693,239 @@ def build_mou():
 
 # -------------------------------------------------------------- lecture.html
 def build_lecture():
-    topics = [
-        ("sparkles", "생성형 AI와 AI 윤리 기초", "생성형 AI의 원리와 한계, 책임 있는 활용 원칙을 다루는 입문 특강입니다.", "전 대상 · 입문"),
-        ("book-open-check", "연구·출판윤리와 AI 활용 표기", "논문·과제·연구물에서의 AI 활용 기준과 표기 방법, 사전점검 요령을 다룹니다.", "대학원 · 연구기관"),
-        ("graduation-cap", "캠퍼스 AI 리터러시", "대학생·교직원을 위한 AI 활용 역량과 윤리 감수성 교육입니다.", "대학 · 교직원"),
-        ("building-2", "기업의 책임 있는 AI 활용", "임직원 AI 활용 가이드라인, 보안·저작권·표기 이슈를 실무 중심으로 다룹니다.", "기업 · 임직원"),
-        ("landmark", "공공부문 AI 윤리", "공무원·공공기관 구성원을 위한 AI 행정 활용과 윤리 기준 교육입니다.", "공공기관 · 지자체"),
-        ("file-search", "AI 생성물 판별과 사전점검 실무", "AI 생성물 판별 원리와 제출 전 사전점검 방법을 실습형으로 진행합니다.", "실습 워크숍"),
+    L_EMAIL = "metropoly@naver.com"     # 출강 문의 전용 메일
+    L_TEL = "010-9913-7771"             # 출강 문의 전화
+
+    # ── 6개 교육 분야 (번호, 제목, 아이콘, 대상 태그, 세부 항목) ──
+    CURRICULA = [
+        ("01", "AI 윤리 및 책임 있는 AI 활용", "shield-check", "전 대상 공통 · 기본", [
+            "생성형 AI의 이해와 한계", "책임 있는 AI 활용 원칙", "AI 결과물에 대한 인간의 책임",
+            "AI 환각(Hallucination)의 이해", "AI 결과물 검증 및 팩트체크", "알고리즘 편향과 차별 문제",
+            "투명성·책임성·공정성 등 AI 윤리 핵심 원칙", "실제 AI 윤리 사례 분석"]),
+        ("02", "기업 AI 컴플라이언스", "building-2", "기업 · 공공기관", [
+            "기업의 생성형 AI 활용과 법적·윤리적 리스크", "기업이 알아야 할 국내 AI 관련 법·제도",
+            "국내 AI 기본법 등 주요 제도 이해", "EU AI Act 등 글로벌 AI 규제 동향",
+            "기업 AI 활용 내부통제", "임직원 생성형 AI 사용 기준", "사내 AI 활용 가이드라인 수립",
+            "AI 활용 시 책임소재", "AI 거버넌스 및 관리체계", "기업 AI 컴플라이언스 자율점검"]),
+        ("03", "AI 정보보안 · 개인정보 보호", "lock", "기업 · 공공기관 · 연구기관", [
+            "생성형 AI 사용과 기업 정보보안", "사내 기밀 및 영업비밀 유출 예방",
+            "개인정보·고객정보의 생성형 AI 입력 위험", "연구자료·기술자료·소스코드·내부문서 보호",
+            "외부 생성형 AI 서비스 사용 시 보안수칙", "프롬프트 인젝션(Prompt Injection)의 이해와 대응",
+            "민감정보 입력 및 데이터 노출 위험", "AI 서비스 이용 시 데이터 처리방식 확인",
+            "생성형 AI 관련 보안사고 사례", "정보 유출 발생 시 대응 절차"]),
+        ("04", "생성형 AI 저작권 · 법적 리스크", "copyright", "기업 · 크리에이터 · 마케팅", [
+            "생성형 AI와 저작권의 기본 이해", "AI 학습데이터와 저작권 이슈", "AI 생성물의 저작권 문제",
+            "생성형 AI 산출물의 상업적 활용 시 주의사항", "AI 생성 이미지·영상·문서·코드 활용",
+            "기존 저작물의 AI 입력 및 활용", "초상권·인격권 문제", "AI 음성·이미지 합성 시 주의사항",
+            "기업 마케팅 콘텐츠의 AI 활용", "AI 콘텐츠 활용 시 법적 리스크 점검"]),
+        ("05", "대학 · 연구자를 위한 AI 연구윤리", "book-open-check", "대학 · 대학원 · 연구기관", [
+            "생성형 AI 시대의 연구윤리", "논문 작성 과정에서 생성형 AI 활용",
+            "대학 과제·레포트에서의 AI 활용 범위", "아이디어·자료정리·번역·교정·코딩 등 단계별 AI 활용",
+            "AI 활용 사실 및 활용 범위 표시", "AI 생성 문장과 표절·연구부정행위",
+            "AI가 생성한 허위 참고문헌 및 DOI 검증", "연구데이터·설문자료·미공개 연구자료 보호",
+            "논문·학술자료의 저작권", "AI 결과물의 출처 및 사실 검증", "연구자의 최종 검토와 책임"]),
+        ("06", "청소년 AI 윤리 · 디지털 시민교육", "school", "초 · 중 · 고 · 교육청", [
+            "생성형 AI의 원리와 올바른 활용", "AI가 항상 정답을 말하지 않는 이유", "AI 환각 체험",
+            "잘못된 AI 정보 판별 및 팩트체크", "수행평가·숙제·발표에서의 AI 활용", "AI 활용과 표절 예방",
+            "과제 제출 시 AI 활용 범위 표시", "딥페이크 이미지·영상·음성의 이해",
+            "딥페이크를 이용한 디지털 범죄 예방", "AI 사칭·사기 콘텐츠 식별", "개인정보 및 초상권 보호",
+            "친구의 사진·음성을 AI로 사용하는 행위의 문제점", "AI 사이버폭력 예방",
+            "책임 있는 AI 활용과 디지털 시민의식"]),
     ]
-    topic_cards = "\n".join(f"""          <article class="card reveal">
+
+    cu_cards = "\n".join(f"""          <article class="cu-card reveal" id="field-{num}">
+            <div class="cu-head">
+              <span class="cu-num">{num}</span>
+              <div class="cu-title"><h3>{title}</h3><span class="cu-tag">{tag}</span></div>
+              <div class="cu-icon"><i data-lucide="{icon}"></i></div>
+            </div>
+            <ul class="cu-list">
+{chr(10).join(f'              <li>{it}</li>' for it in items)}
+            </ul>
+          </article>""" for num, title, icon, tag, items in CURRICULA)
+
+    # ── 가격 ──
+    PRICES = [("1시간 과정", "40"), ("2시간 과정", "70"), ("3시간 과정", "100"), ("4시간 과정", "130")]
+    price_cards = "\n".join(f"""          <div class="price-card reveal">
+            <div class="price-hours">{h}</div>
+            <div class="price-num">{p}<small>만원</small></div>
+            <div class="price-note">전문인력 2인 출강 포함</div>
+          </div>""" for h, p in PRICES)
+
+    # ── 대상별 추천 ──
+    AUD = [
+        ("building-2", "기업 · 공공기관",
+         "AI 윤리 + AI 컴플라이언스 + 정보보안 + 개인정보 보호 + 저작권 + AI 거버넌스",
+         "실제 업무에서 생성형 AI를 안전하게 활용하기 위한 실무·보안 중심 교육으로 구성합니다."),
+        ("graduation-cap", "대학 · 연구기관",
+         "생성형 AI 활용 + 연구윤리 + 논문·과제 AI 활용 + 저작권 + 개인정보 + AI 결과 검증",
+         "연구자와 대학(원)생이 생성형 AI를 책임 있게 활용하기 위한 연구윤리 중심 교육으로 구성합니다."),
+        ("school", "초 · 중 · 고등학교",
+         "AI 윤리 + 디지털 시민성 + 학습윤리 + 딥페이크 예방 + 개인정보 보호 + 팩트체크",
+         "학생들이 생성형 AI를 안전하고 올바르게 활용할 수 있도록 사례와 체험 중심으로 구성합니다."),
+        ("briefcase", "교직원 · 관리자",
+         "AI 윤리 + 기관 AI 활용지침 + 개인정보 보호 + 정보보안 + AI 거버넌스 + 사고 대응",
+         "학생·교직원 또는 조직 구성원의 AI 활용을 관리하기 위한 관리자 중심 교육으로 구성합니다."),
+    ]
+    aud_cards = "\n".join(f"""          <article class="card reveal">
             <div class="card-icon"><i data-lucide="{ic}"></i></div>
             <h3>{t}</h3>
-            <p style="margin-bottom:14px">{d}</p>
-            <div class="chips"><span class="chip">{tag}</span></div>
-          </article>""" for ic, t, d, tag in topics)
+            <span class="combo">{combo}</span>
+            <p>{d}</p>
+          </article>""" for ic, t, combo, d in AUD)
 
-    body = hero_sub("강의 · 교육 신청",
-                    "위원회 전문위원과 협력 강사진이 대학·기업·공공기관 어디든 찾아갑니다.",
-                    "강의 신청") + f"""
+    # ── 구성 예시 ──
+    EX = [
+        ("1시간", "청소년 특강", "딥페이크 예방 + AI 학습윤리 + 팩트체크"),
+        ("2시간", "기업교육", "AI 컴플라이언스 + 정보보안 + 개인정보 보호"),
+        ("3시간", "대학·연구기관 교육", "생성형 AI 연구윤리 + 저작권 + AI 환각 및 참고문헌 검증"),
+        ("4시간", "기업 심화교육", "AI 윤리 + 컴플라이언스 + 정보보안 + 개인정보 + 저작권 + AI 거버넌스"),
+    ]
+    ex_cards = "\n".join(f"""          <div class="card reveal" style="padding:24px 24px">
+            <span class="card-num">{t} 과정</span>
+            <h3 style="font-size:16.5px;margin-bottom:8px">{name}</h3>
+            <p style="font-size:13.8px;font-weight:600;color:var(--blue-600)">{combo}</p>
+          </div>""" for t, name, combo in EX)
+
+    body = f"""    <section class="page-hero">
+      <div class="wrap page-hero-inner" style="padding:78px 0 72px">
+        <p class="crumb"><a href="index.html">홈</a> &nbsp;›&nbsp; 강의 신청</p>
+        <span class="hl-pill"><i data-lucide="badge-check"></i>S대 AI공학 박사 필수 참석 · 전문인력 2인 공동 출강</span>
+        <h1>AI 윤리교육 · 전문 출강</h1>
+        <p style="font-size:17.5px;max-width:700px">AI 윤리부터 컴플라이언스, 정보보안, 연구윤리까지<br>
+           기관의 목적과 대상에 맞춘 전문 AI 교육을 제공합니다.</p>
+        <div style="display:flex;gap:11px;flex-wrap:wrap;margin-top:30px">
+          <a class="btn btn-primary" href="#request">출강 문의하기 <i data-lucide="arrow-right"></i></a>
+          <a class="btn btn-light" href="#fields">교육 분야 보기</a>
+          <a class="btn btn-light" href="#price">비용 안내</a>
+        </div>
+      </div>
+    </section>
 
     <section class="section section--tight">
       <div class="wrap">
         <div class="stats reveal">
-          <div class="stat"><div class="stat-num">6</div><div class="stat-label">강의 분야</div></div>
-          <div class="stat"><div class="stat-num">4</div><div class="stat-label">진행 형태</div></div>
-          <div class="stat"><div class="stat-num">전국</div><div class="stat-label">출강 지역 (온라인 병행)</div></div>
-          <div class="stat"><div class="stat-num">상시</div><div class="stat-label">신청 접수</div></div>
+          <div class="stat"><div class="stat-num" style="font-size:clamp(19px,2.2vw,24px);line-height:1.4">S대 AI공학 박사</div><div class="stat-label">필수 참석</div></div>
+          <div class="stat"><div class="stat-num">2인</div><div class="stat-label">위원회 직속 석·박사 공동 출강</div></div>
+          <div class="stat"><div class="stat-num">1~4시간</div><div class="stat-label">교육시간 자유 선택</div></div>
+          <div class="stat"><div class="stat-num">6개 분야</div><div class="stat-label">자유 조합 커리큘럼</div></div>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="wrap">
-        <div class="center" style="margin-bottom:42px">
-          <span class="eyebrow">Lecture Topics</span>
-          <h2 class="h-sec">강의 분야</h2>
-          <p class="h-sub">기관의 목적과 대상에 맞춰 주제와 난이도를 조정해 드립니다. 두 개 이상 주제를 묶은 맞춤 과정도 가능합니다.</p>
-        </div>
-        <div class="grid grid-3">
-{topic_cards}
+        <div class="split">
+          <div class="reveal">
+            <span class="eyebrow">Instructors</span>
+            <h2 class="h-sec">전문 출강진</h2>
+            <p class="lead" style="margin-bottom:22px">모든 교육은 <strong>AI 분야 전문인력 총 2인</strong>이 공동 출강합니다.</p>
+            <ul style="display:grid;gap:12px;margin-bottom:8px">
+              <li style="display:flex;gap:10px;align-items:flex-start"><i data-lucide="check-circle-2" style="width:19px;height:19px;color:#00B4A6;flex-shrink:0;margin-top:4px"></i><span><strong>외주 인력이 아닌, 한국AI윤리위원회 단독 직속 소속 전문 인력</strong></span></li>
+              <li style="display:flex;gap:10px;align-items:flex-start"><i data-lucide="check-circle-2" style="width:19px;height:19px;color:#00B4A6;flex-shrink:0;margin-top:4px"></i><span><strong>S대 AI공학 박사 1인 필수 참석</strong></span></li>
+              <li style="display:flex;gap:10px;align-items:flex-start"><i data-lucide="check-circle-2" style="width:19px;height:19px;color:#00B4A6;flex-shrink:0;margin-top:4px"></i><span>공학석사 1인 참석</span></li>
+              <li style="display:flex;gap:10px;align-items:flex-start"><i data-lucide="check-circle-2" style="width:19px;height:19px;color:#00B4A6;flex-shrink:0;margin-top:4px"></i><span>총 2인 공동 출강</span></li>
+              <li style="display:flex;gap:10px;align-items:flex-start"><i data-lucide="check-circle-2" style="width:19px;height:19px;color:#00B4A6;flex-shrink:0;margin-top:4px"></i><span>교육 대상과 목적에 따라 강의 · 사례 · 실습을 맞춤 구성</span></li>
+            </ul>
+          </div>
+          <div class="reveal" style="display:grid;gap:14px">
+            <div class="inst-card">
+              <div class="inst-avatar"><i data-lucide="graduation-cap"></i></div>
+              <div>
+                <div class="inst-deg">강사 1 · <strong>필수 참석</strong></div>
+                <div class="inst-name">S대 AI공학 박사</div>
+                <div class="inst-field">이론 · 기술 원리 · 사례 분석 강의</div>
+              </div>
+              <span class="badge" style="margin-left:auto">PhD</span>
+            </div>
+            <div class="inst-card">
+              <div class="inst-avatar inst-avatar--teal"><i data-lucide="user-check"></i></div>
+              <div>
+                <div class="inst-deg">강사 2 · 공동 출강</div>
+                <div class="inst-name">공학석사</div>
+                <div class="inst-field">실습 진행 · 질의응답 · 현장 지원</div>
+              </div>
+              <span class="badge badge--teal" style="margin-left:auto">MS</span>
+            </div>
+            <div class="notice" style="font-size:13.5px">
+              <strong>위원회 직속 전문 인력 —</strong> 출강 인력은 외주·파견 강사가 아닌,
+              <strong>한국AI윤리위원회에만 단독 직속 소속된 석·박사 이상 전문 인력</strong>입니다.
+              위원회의 윤리 기준과 커리큘럼을 일관되게 전달하며, 교육 품질을 위원회가 직접 책임집니다.
+            </div>
+            <div class="notice notice--teal" style="font-size:13.5px">
+              두 강사가 강의와 실습을 나누어 진행하므로 대규모 인원 교육과 실습형 워크숍도 안정적으로 운영됩니다.
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section--gray">
+    <section class="section section--gray" id="price">
       <div class="wrap">
         <div class="center" style="margin-bottom:40px">
-          <span class="eyebrow">Who We Visit</span>
-          <h2 class="h-sec">출강 대상</h2>
-          <p class="h-sub">아래 기관의 교육 프로그램에 강사를 파견합니다.</p>
+          <span class="eyebrow">Pricing</span>
+          <h2 class="h-sec">교육시간 및 비용</h2>
+          <p class="h-sub">최소 1시간부터 최대 4시간까지 원하는 교육시간을 선택할 수 있습니다. 모든 과정에 전문인력 2인 출강이 포함됩니다.</p>
         </div>
-        <div class="grid grid-3">
-          <article class="card reveal"><div class="card-icon"><i data-lucide="graduation-cap"></i></div>
-            <h3>대학 · 대학원</h3><p>신입생 교육, 연구윤리 특강, 논문작성 세미나, 교직원 연수</p></article>
-          <article class="card reveal"><div class="card-icon"><i data-lucide="building-2"></i></div>
-            <h3>기업</h3><p>임직원 AI 활용 교육, 신입사원 연수, 리더십 대상 브리핑</p></article>
-          <article class="card reveal"><div class="card-icon"><i data-lucide="landmark"></i></div>
-            <h3>공공기관 · 지자체</h3><p>공무원 교육, 시민 대상 AI 리터러시 강좌, 기관 초청 특강</p></article>
-          <article class="card reveal"><div class="card-icon"><i data-lucide="briefcase"></i></div>
-            <h3>정부지원사업 운영기관</h3><p>정부·지자체 지원사업의 교육 프로그램, 창업지원기관·평생교육기관 연계 강의</p></article>
-          <article class="card reveal"><div class="card-icon"><i data-lucide="school"></i></div>
-            <h3>초·중·고 및 교원연수</h3><p>학생 눈높이 AI 윤리 교육, 교사 대상 생성형 AI 지도법 연수</p></article>
-          <article class="card reveal"><div class="card-icon"><i data-lucide="users"></i></div>
-            <h3>학회 · 협회 · 단체</h3><p>학술대회 초청 강연, 회원 대상 세미나, 공동 교육 프로그램</p></article>
-        </div>
-        <div class="notice" style="margin-top:28px">
-          <strong>공공·정부 연계 프로그램 —</strong> 정부·지자체·공공기관 주관 교육과
-          정부지원사업 연계 프로그램은 주관 기관과의 협의를 통해
-          일정 · 내용 · 증빙 서류를 맞춤으로 준비해 드립니다.
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="center" style="margin-bottom:40px">
-          <span class="eyebrow">Format</span>
-          <h2 class="h-sec">진행 형태</h2>
-        </div>
-        <div class="grid grid-4">
-          <article class="card reveal center"><div class="card-icon" style="margin:0 auto 16px"><i data-lucide="mic"></i></div>
-            <h3>특강</h3><p>1~2시간 · 전체 대상 강연형</p></article>
-          <article class="card reveal center"><div class="card-icon" style="margin:0 auto 16px"><i data-lucide="users-round"></i></div>
-            <h3>워크숍</h3><p>반나절 · 실습·토론 중심</p></article>
-          <article class="card reveal center"><div class="card-icon" style="margin:0 auto 16px"><i data-lucide="calendar-days"></i></div>
-            <h3>정기 과정</h3><p>4~8회차 · 커리큘럼형 교육</p></article>
-          <article class="card reveal center"><div class="card-icon card-icon--teal" style="margin:0 auto 16px"><i data-lucide="laptop"></i></div>
-            <h3>온라인</h3><p>실시간 화상 · 녹화 강의 병행</p></article>
+        <div class="price-grid">
+{price_cards}
         </div>
         <div class="grid grid-2" style="margin-top:22px">
           <div class="notice">
-            <strong>발급 문서 —</strong> 출강확인서, 교육 결과 요약(요청 시), 위원회 명의 교육 이수확인서(요청 시)를
-            발급해 드립니다. 기관 내부 증빙과 사업 결과 보고에 활용하실 수 있습니다.
+            <strong>자유 조합 —</strong> 교육시간에 따라 강의 내용이 고정되지 않습니다.
+            아래 전체 교육 분야에서 필요한 주제를 자유롭게 선택 · 조합하실 수 있으며,
+            교육 목적 · 대상 · 수준에 따라 세부 커리큘럼 조정이 가능합니다.
           </div>
-          <div class="notice notice--teal">
-            <strong>강의료 —</strong> 대상·시간·지역·형태에 따라 협의하여 결정합니다.
-            비영리·교육기관 및 공익 목적 프로그램은 협의 시 말씀해 주세요.
+          <div class="notice notice--gray">
+            <strong>추가 비용 안내 —</strong> 출장지역, 교육인원, 별도 교안 제작, 추가 실습 및
+            특별 요청사항 등에 따라 추가 비용이 발생할 수 있습니다. 문의 시 정확한 견적을 안내드립니다.
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fields">
+      <div class="wrap">
+        <div class="center" style="margin-bottom:42px">
+          <span class="eyebrow">Curriculum</span>
+          <h2 class="h-sec">교육 분야</h2>
+          <p class="h-sub">6개 분야의 세부 주제 중 기관에 필요한 내용을 자유롭게 선택 · 조합하실 수 있습니다.</p>
+        </div>
+        <div class="grid grid-2" style="align-items:start">
+{cu_cards}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ink">
+      <div class="wrap">
+        <div class="center" style="margin-bottom:38px">
+          <span class="eyebrow">Custom Curriculum</span>
+          <h2 class="h-sec" style="color:#fff">자유로운 커리큘럼 선택</h2>
+          <p class="h-sub" style="margin:0 auto">「1시간부터 4시간까지, 필요한 교육만 선택」<br>
+             교육시간에 따라 선택 가능한 강의를 제한하지 않습니다. 기관에서 교육 목적과 대상에 맞춰 원하는 주제를 선택하시면,
+             한국AI윤리위원회가 교육시간에 맞게 최종 커리큘럼을 구성해 드립니다.</p>
+        </div>
+        <div class="grid grid-4">
+{ex_cards}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="center" style="margin-bottom:40px">
+          <span class="eyebrow">Recommended</span>
+          <h2 class="h-sec">대상별 추천 교육</h2>
+          <p class="h-sub">기관 유형별로 가장 많이 선택하는 조합입니다. 그대로 진행하거나 자유롭게 바꿔 구성하실 수 있습니다.</p>
+        </div>
+        <div class="grid grid-2">
+{aud_cards}
+        </div>
+        <div class="notice" style="margin-top:24px">
+          <strong>공공·정부 연계 프로그램 —</strong> 정부·지자체·공공기관 주관 교육과 정부지원사업 연계 프로그램은
+          주관 기관과의 협의를 통해 일정 · 내용 · 증빙 서류를 맞춤으로 준비해 드립니다.
+          출강확인서, 교육 결과 요약, 교육 이수확인서 발급이 가능합니다.
         </div>
       </div>
     </section>
@@ -1794,45 +1933,45 @@ def build_lecture():
     <section class="section section--gray">
       <div class="wrap">
         <div class="center" style="margin-bottom:38px">
-          <span class="eyebrow">Instructors</span>
-          <h2 class="h-sec">강사진</h2>
-          <p class="h-sub">위원회 전문위원과 분과별 협력 강사진이 출강합니다. 강사 프로필과 커리큘럼 소개서는 신청 시 함께 보내드립니다.</p>
+          <span class="eyebrow">Process</span>
+          <h2 class="h-sec">교육 진행 절차</h2>
         </div>
-        <div class="member-grid" id="lecturerGrid"></div>
-        <p class="field-hint" style="text-align:center;margin-top:18px">
-          전체 위원 명단은 <a href="members.html" style="color:var(--blue);font-weight:600">조직·위원</a> 페이지에서 확인하실 수 있습니다.
-        </p>
+        <div class="grid grid-3">
+          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 01</span><h3 style="font-size:16px">출강 문의</h3><p style="font-size:14px">아래 양식 또는 메일 접수</p></div>
+          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 02</span><h3 style="font-size:16px">대상 · 목적 확인</h3><p style="font-size:14px">교육 대상과 목적 협의</p></div>
+          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 03</span><h3 style="font-size:16px">교육시간 선택</h3><p style="font-size:14px">1~4시간 중 선택</p></div>
+          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 04</span><h3 style="font-size:16px">교육 분야 선택</h3><p style="font-size:14px">6개 분야 자유 조합</p></div>
+          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 05</span><h3 style="font-size:16px">맞춤 커리큘럼 구성</h3><p style="font-size:14px">위원회가 최종 구성</p></div>
+          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 06</span><h3 style="font-size:16px">전문인력 2인 출강</h3><p style="font-size:14px">교육 진행 · 증빙 발급</p></div>
+        </div>
       </div>
     </section>
 
     <section class="section">
-      <div class="wrap-narrow">
+      <div class="wrap">
         <div class="center" style="margin-bottom:38px">
-          <span class="eyebrow">Process</span>
-          <h2 class="h-sec">신청 절차</h2>
+          <span class="eyebrow">Advisory</span>
+          <h2 class="h-sec">커리큘럼 자문 위원단</h2>
+          <p class="h-sub">교육 커리큘럼은 위원회 6개 분과 전문위원의 자문과 검토를 거쳐 구성됩니다.</p>
         </div>
-        <div class="grid grid-4">
-          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 01</span><h3 style="font-size:16px">신청서 접수</h3><p style="font-size:14px">아래 양식 작성</p></div>
-          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 02</span><h3 style="font-size:16px">협의</h3><p style="font-size:14px">주제 · 일정 · 강의료</p></div>
-          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 03</span><h3 style="font-size:16px">확정 · 준비</h3><p style="font-size:14px">강사 배정 · 자료 준비</p></div>
-          <div class="card center reveal" style="padding:24px 18px"><span class="card-num">STEP 04</span><h3 style="font-size:16px">강의 · 증빙</h3><p style="font-size:14px">진행 후 확인서 발급</p></div>
-        </div>
+        <div class="member-grid" id="lecturerGrid"></div>
       </div>
     </section>
 
     <section class="section section--gray" id="request">
       <div class="wrap-narrow">
         <div class="center" style="margin-bottom:34px">
-          <span class="eyebrow">Request</span>
-          <h2 class="h-sec">강의 신청</h2>
-          <p class="h-sub" style="margin:0 auto">작성해 주시면 담당자가 확인 후 1~3일 내 회신드립니다.</p>
+          <span class="eyebrow">Contact</span>
+          <h2 class="h-sec">AI 윤리교육 출강 문의</h2>
+          <p class="h-sub" style="margin:0 auto">우리 기관에 필요한 AI 교육을 직접 구성해 보세요.
+             작성해 주시면 담당자가 확인 후 1~3일 내 회신드립니다.</p>
         </div>
 
         <form class="form" id="lectureForm" action="#">
           <div class="form-row">
             <div class="field">
               <label for="l-org">기관·기업명<span class="req">*</span></label>
-              <input type="text" id="l-org" name="기관명" required placeholder="예) ○○대학교 교육혁신원">
+              <input type="text" id="l-org" name="기관명" required placeholder="예) ○○대학교 · ○○주식회사 · ○○고등학교">
             </div>
             <div class="field">
               <label for="l-name">담당자 성함<span class="req">*</span></label>
@@ -1846,29 +1985,40 @@ def build_lecture():
               <p class="field-hint">회신받으실 연락처 하나만 남겨주시면 됩니다.</p>
             </div>
             <div class="field">
-              <label for="l-topic">희망 강의 분야<span class="req">*</span></label>
-              <select id="l-topic" name="희망강의분야" required>
-                <option value="">선택해 주세요</option>
-                <option>생성형 AI와 AI 윤리 기초</option>
-                <option>연구·출판윤리와 AI 활용 표기</option>
-                <option>캠퍼스 AI 리터러시</option>
-                <option>기업의 책임 있는 AI 활용</option>
-                <option>공공부문 AI 윤리</option>
-                <option>AI 생성물 판별과 사전점검 실무</option>
-                <option>맞춤 과정 (협의)</option>
+              <label for="l-hours">희망 교육시간</label>
+              <select id="l-hours" name="희망교육시간">
+                <option value="">선택해 주세요 (미정 가능)</option>
+                <option>1시간 (40만원)</option>
+                <option>2시간 (70만원)</option>
+                <option>3시간 (100만원)</option>
+                <option>4시간 (130만원)</option>
+                <option>미정 · 협의</option>
               </select>
             </div>
           </div>
           <div class="field">
+            <label for="l-topic">희망 교육 분야<span class="req">*</span></label>
+            <select id="l-topic" name="희망교육분야" required>
+              <option value="">선택해 주세요</option>
+              <option>01. AI 윤리 및 책임 있는 AI 활용</option>
+              <option>02. 기업 AI 컴플라이언스</option>
+              <option>03. AI 정보보안 · 개인정보 보호</option>
+              <option>04. 생성형 AI 저작권 · 법적 리스크</option>
+              <option>05. 대학 · 연구자를 위한 AI 연구윤리</option>
+              <option>06. 청소년 AI 윤리 · 디지털 시민교육</option>
+              <option>복수 분야 조합 희망 (요청사항에 기재)</option>
+            </select>
+          </div>
+          <div class="field">
             <label for="l-msg">요청 사항 (선택)</label>
-            <textarea id="l-msg" name="요청사항" style="min-height:100px" placeholder="희망 일정, 예상 인원, 진행 방식 등을 간단히 적어주셔도 좋습니다."></textarea>
+            <textarea id="l-msg" name="요청사항" style="min-height:100px" placeholder="희망 일정, 예상 인원, 조합하고 싶은 분야 등을 간단히 적어주셔도 좋습니다."></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="justify-self:start">
-            강의 신청 보내기 <i data-lucide="send"></i>
+            출강 문의 보내기 <i data-lucide="send"></i>
           </button>
           <p class="field-hint">
             버튼을 누르면 메일 앱이 열리고 작성 내용이 자동으로 담깁니다.
-            직접 보내실 경우: <a href="mailto:{EMAIL}" style="color:var(--blue);font-weight:600">{EMAIL}</a>
+            직접 보내실 경우: <a href="mailto:{L_EMAIL}" style="color:var(--blue);font-weight:600">{L_EMAIL}</a>
           </p>
         </form>
       </div>
@@ -1877,24 +2027,25 @@ def build_lecture():
     <section class="section section--tight">
       <div class="wrap">
         <div class="cta-band">
-          <div><h2>기관 협약과 함께라면 더 깊이 있게</h2>
-            <p>MOU 체결 기관에는 정기 교육 과정과 공동 캠페인을 우선 지원합니다.</p></div>
+          <div><h2>우리 기관에 필요한 AI 교육을 직접 구성해 보세요</h2>
+            <p>기업·공공기관부터 학교·대학·연구기관까지, 교육 대상과 목적에 맞춰
+               1시간부터 4시간까지 맞춤형 AI 윤리교육을 제공합니다.</p></div>
           <div class="btns">
-            <a class="btn btn-white" href="mou.html#inquiry">MOU·제휴 문의</a>
-            <a class="btn btn-light" href="business.html">주요사업 보기</a>
+            <a class="btn btn-white" href="#request">AI 윤리교육 출강 문의</a>
           </div>
         </div>
+        <p class="small-contact">출강 문의 &nbsp;|&nbsp; {L_EMAIL} &nbsp;·&nbsp; {L_TEL}</p>
       </div>
     </section>"""
 
     script = """  <script src="assets/js/members-data.js"></script>
   <script>
-  /* 강사진 — 조직·위원 데이터의 '전문위원'을 자동으로 표시합니다 */
+  /* 자문 위원단 — 조직·위원 데이터의 '전문위원'을 자동으로 표시합니다 */
   (function(){
     var box=document.getElementById('lecturerGrid');
     if(!box||!window.KAIEC_MEMBERS)return;
     var list=window.KAIEC_MEMBERS.filter(function(m){return m.group==='전문위원'});
-    if(!list.length){box.outerHTML='<p style="text-align:center;color:var(--gray-500)">강사진 명단은 준비 중입니다.</p>';return}
+    if(!list.length){box.outerHTML='';return}
     box.innerHTML=list.map(function(m){
       var initial=(m.name||'?').replace(/[^가-힣A-Za-z]/g,'').slice(0,1)||'·';
       return '<div class="member"><div class="member-avatar">'+initial+'</div>'
@@ -1903,34 +2054,37 @@ def build_lecture():
         +'<div class="member-field">'+(m.field||'')+'</div></div>';
     }).join('');
   })();
-  /* 강의 신청 폼 — 작성 내용을 담아 메일 앱을 엽니다 */
+  /* 출강 문의 폼 — 작성 내용을 담아 메일 앱을 엽니다 */
   (function(){
     var f=document.getElementById('lectureForm');
     if(!f)return;
     f.addEventListener('submit',function(e){
       e.preventDefault();
       function v(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():''}
-      var subject='[강의 신청] '+v('기관명')+' — '+v('희망강의분야');
+      var subject='[출강 문의] '+v('기관명')+' — '+v('희망교육분야');
       var lines=[
         '■ 기관·기업명 : '+v('기관명'),
         '■ 담당자      : '+v('담당자'),
         '■ 연락처      : '+v('연락처'),
-        '■ 희망 강의 분야 : '+v('희망강의분야'),
+        '■ 희망 교육시간 : '+v('희망교육시간'),
+        '■ 희망 교육 분야 : '+v('희망교육분야'),
         '',
         '■ 요청 사항',
         v('요청사항'),
         '',
-        '--- 한국AI윤리위원회 홈페이지 강의 신청 양식에서 작성됨 ---'
+        '--- 한국AI윤리위원회 AI 윤리교육 출강 문의 양식에서 작성됨 ---'
       ];
-      location.href='mailto:__EMAIL__?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\\n'));
+      location.href='mailto:__LEMAIL__?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\\n'));
     });
   })();
   </script>
-""".replace('__EMAIL__', EMAIL)
+""".replace('__LEMAIL__', L_EMAIL)
 
-    page("lecture.html", "강의 · 교육 신청",
-         "한국AI윤리위원회 전문위원·협력 강사진의 AI 윤리 강의 신청. 대학·기업·공공기관·지자체·정부지원사업 연계 프로그램에 생성형 AI 윤리, 연구·출판윤리, AI 리터러시 강사를 파견합니다.",
-         body, extra_script=script)
+    page("lecture.html", "AI 윤리교육 · 전문 출강",
+         "AI 윤리교육 전문 출강 — 한국AI윤리위원회 직속 석·박사 전문인력 2인 공동 출강(S대 AI공학 박사 필수 참석). AI 윤리, 기업 AI 컴플라이언스, 정보보안·개인정보, 생성형 AI 저작권, 연구윤리, 청소년 AI 윤리 교육을 1~4시간 맞춤형 커리큘럼으로 제공합니다.",
+         body, extra_script=script,
+         keywords=["AI 윤리교육", "AI 교육 출강", "생성형 AI 교육", "AI 컴플라이언스 교육", "AI 연구윤리 교육",
+                   "딥페이크 예방 교육", "청소년 AI 교육", "기업 AI 교육", "AI 정보보안 교육", "찾아가는 AI 교육"])
 
 
 # ---------------------------------------------------------------- apply.html
@@ -2013,7 +2167,7 @@ def build_apply():
     </section>"""
 
     page("apply.html", "위원 지원",
-         "한국AI윤리위원회 전문위원·활동위원·AI 윤리 파트너 상시 모집. 온라인으로 간편하게 지원하실 수 있습니다.",
+         "한국AI윤리위원회 전문위원·AI 윤리 파트너 상시 모집. 온라인으로 간편하게 지원하실 수 있습니다.",
          body)
 
 
