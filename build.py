@@ -43,6 +43,9 @@ COPYCLEAN_URL = "https://skkc.co.kr"
 # =============================================================================
 CATEGORIES = ["공지", "캠페인", "활동", "연구·정책"]
 
+# 빌드할 때마다 바뀌는 버전 태그 — CSS/JS 주소 뒤에 붙여 방문자 브라우저 캐시를 자동 갱신
+BUILD_V = datetime.datetime.now().strftime("%Y%m%d%H%M")
+
 
 def _inline(s):
     """굵게 **텍스트**, 링크 [텍스트](주소) 변환"""
@@ -305,7 +308,7 @@ def page(filename, title, desc, body, extra_head="", extra_script="", keywords=N
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v={BUILD_V}">
 <script>document.documentElement.className+=' js';</script>
 {extra_head}</head>
 <body>
@@ -314,7 +317,7 @@ def page(filename, title, desc, body, extra_head="", extra_script="", keywords=N
 {body}
   </main>
   {footer()}
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v={BUILD_V}"></script>
 {extra_script}</body>
 </html>
 """
