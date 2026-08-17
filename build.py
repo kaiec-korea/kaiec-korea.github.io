@@ -5,7 +5,8 @@
   (JS로 헤더를 그리면 네이버 크롤러가 메뉴를 못 읽는 경우가 있어 이렇게 처리)
 - 메뉴나 푸터를 바꾸려면 이 파일을 수정하고 `python3 build.py`를 다시 실행하세요.
 """
-import os, io, re
+import os, io, re, glob, datetime
+import html as _html
 from icons import ICONS
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -25,12 +26,132 @@ def inline_icons(html):
                 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
                 'stroke-linejoin="round" aria-hidden="true"%s>%s</svg>' % (attrs, inner))
     return _ICON_RE.sub(rep, html)
-SITE_URL = "https://kaiec.github.io"          # ← 배포 후 실제 주소로 변경
+SITE_URL = "https://kaiec-korea.github.io"    # 실제 배포 주소 (확정)
 SITE_NAME = "한국AI윤리위원회"
 SITE_EN = "Korea AI Ethics Committee"
-EMAIL = "skkc.office@gmail.com"                # ← 대표 문의 메일
+EMAIL = "kaiec.korea@gmail.com"                # ← 대표 문의 메일
 # 위원 지원서 구글폼 — 바꾸려면 이 주소만 교체 후 python3 build.py 재실행
 GOOGLE_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSezVLiJJVsieoUS2gLRt2Y22MmwhO3MtWevR-tPaJPmoYra4Q/viewform"
+# 카피클린 공식 사이트
+COPYCLEAN_URL = "https://skkc.co.kr"
+
+# =============================================================================
+#  소식 게시판 (블로그) 엔진
+#  - posts-src/ 폴더의 .md 파일 1개 = 게시글 1개 (개별 HTML 페이지로 생성 → SEO 최적)
+#  - 파일명이 곧 주소가 됩니다: posts-src/2026-08-17-open.md → post-2026-08-17-open.html
+#  - 작성법은 posts-src/_작성방법.txt 참고
+# =============================================================================
+CATEGORIES = ["공지", "캠페인", "활동", "연구·정책"]
+
+
+def _inline(s):
+    """굵게 **텍스트**, 링크 [텍스트](주소) 변환"""
+    s = _html.escape(s, quote=False)
+    s = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', s)
+    def _link(m):
+        txt, url = m.group(1), m.group(2)
+        ext = ' target="_blank" rel="noopener"' if url.startswith('http') else ''
+        return f'<a href="{url}"{ext} style="color:var(--blue);font-weight:600">{txt}</a>'
+    s = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', _link, s)
+    return s
+
+
+def md_to_html(body):
+    """간단 마크다운 → HTML (##소제목, ###소소제목, -목록, ![설명](이미지), 문단)"""
+    out, buf = [], []
+    inlist = False
+
+    def flush_p():
+        if buf:
+            out.append('<p>' + _inline(' '.join(buf)) + '</p>')
+            buf.clear()
+
+    def close_list():
+        nonlocal inlist
+        if inlist:
+            out.append('</ul>')
+            inlist = False
+
+    for raw in body.strip().splitlines():
+        line = raw.strip()
+        if not line:
+            flush_p(); close_list(); continue
+        m = re.match(r'^!\[([^\]]*)\]\(([^)]+)\)$', line)
+        if m:
+            flush_p(); close_list()
+            alt, src = m.group(1), m.group(2)
+            if not src.startswith('http'):
+                src = 'assets/img/posts/' + src
+            cap = f'<figcaption>{_inline(alt)}</figcaption>' if alt else ''
+            out.append(f'<figure><img src="{src}" alt="{_html.escape(alt)}" loading="lazy">{cap}</figure>')
+            continue
+        if line.startswith('### '):
+            flush_p(); close_list(); out.append('<h3>' + _inline(line[4:]) + '</h3>'); continue
+        if line.startswith('## '):
+            flush_p(); close_list(); out.append('<h2>' + _inline(line[3:]) + '</h2>'); continue
+        if line.startswith('- '):
+            flush_p()
+            if not inlist:
+                out.append('<ul>'); inlist = True
+            out.append('<li>' + _inline(line[2:]) + '</li>'); continue
+        close_list()
+        buf.append(line)
+    flush_p(); close_list()
+    return '\n'.join(out)
+
+
+def load_posts():
+    """posts-src/*.md 읽어 게시글 목록(최신순) 반환"""
+    posts = []
+    for path in glob.glob(os.path.join(BASE, "posts-src", "*.md")):
+        raw = io.open(path, encoding='utf-8').read()
+        head, sep, body = raw.partition('\n---')
+        if not sep:
+            print("  ⚠ 건너뜀(--- 구분선 없음):", os.path.basename(path)); continue
+        meta = {}
+        for line in head.strip().splitlines():
+            if ':' in line:
+                k, v = line.split(':', 1)
+                meta[k.strip()] = v.strip()
+        slug = os.path.splitext(os.path.basename(path))[0]
+        date = meta.get('날짜', '2026.01.01')
+        try:
+            dt = datetime.datetime.strptime(date, "%Y.%m.%d")
+        except ValueError:
+            dt = datetime.datetime(2026, 1, 1)
+        posts.append({
+            "slug": slug,
+            "file": f"post-{slug}.html",
+            "title": meta.get('제목', slug),
+            "date": date,
+            "dt": dt,
+            "category": meta.get('분류', '공지'),
+            "keywords": [k.strip() for k in meta.get('키워드', '').split(',') if k.strip()],
+            "image": meta.get('이미지', '').strip(),
+            "summary": meta.get('요약', ''),
+            "body": body.strip(),
+        })
+    posts.sort(key=lambda p: (p["dt"], p["slug"]), reverse=True)
+    return posts
+
+
+def board_card(p):
+    """게시판 목록 카드 1개"""
+    if p["image"]:
+        thumb = f'<div class="board-thumb"><img src="assets/img/posts/{p["image"]}" alt="{_html.escape(p["title"])}" loading="lazy"></div>'
+    else:
+        thumb = f'''<div class="board-thumb board-thumb--ph">
+            <span class="ph-mark">K<em>AI</em>EC</span><span class="ph-cat">{p["category"]}</span></div>'''
+    badge = 'badge--teal' if p["category"] == '캠페인' else ('badge--gray' if p["category"] in ('활동', '연구·정책') else '')
+    return f'''        <a class="board-card" href="{p["file"]}" data-cat="{p["category"]}">
+          {thumb}
+          <div class="board-body">
+            <div class="board-meta"><span class="badge {badge}">{p["category"]}</span><span class="board-date">{p["date"]}</span></div>
+            <div class="board-title">{p["title"]}</div>
+            <p class="board-sum">{p["summary"]}</p>
+            <span class="board-more">자세히 보기 →</span>
+          </div>
+        </a>'''
 
 NAV = [
     ("about.html", "위원회 소개"),
@@ -43,19 +164,38 @@ NAV = [
     ("mou.html", "MOU·대외협력"),
 ]
 
-LOGO_SVG = """<svg class="brand-mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <rect width="44" height="44" rx="11" fill="url(#kaiecG)"/>
-  <path d="M22 9.5 33 15v9.2c0 6.2-4.4 10.6-11 12.3-6.6-1.7-11-6.1-11-12.3V15L22 9.5Z" stroke="#fff" stroke-width="1.9" stroke-linejoin="round" opacity=".95"/>
-  <circle cx="22" cy="18.4" r="2.5" fill="#6FE3D8"/>
-  <circle cx="16.4" cy="27" r="2.1" fill="#fff"/>
-  <circle cx="27.6" cy="27" r="2.1" fill="#fff"/>
-  <path d="M22 20.9 16.4 25M22 20.9 27.6 25M16.4 27h11.2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
-  <defs><linearGradient id="kaiecG" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-    <stop stop-color="#1F5FE0"/><stop offset="1" stop-color="#0A1628"/></linearGradient></defs>
+LOGO_SVG = """<svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="kgBg" x1="4" y1="2" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E56D6"/><stop offset=".52" stop-color="#12336F"/><stop offset="1" stop-color="#0A1628"/>
+    </linearGradient>
+    <linearGradient id="kgShield" x1="14" y1="10" x2="36" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CFE0FF"/><stop offset="1" stop-color="#6FE3D8"/>
+    </linearGradient>
+    <linearGradient id="kgSheen" x1="0" y1="0" x2="20" y2="26" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="kgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(24 19.5) scale(7.5)">
+      <stop stop-color="#6FE3D8" stop-opacity=".55"/><stop offset="1" stop-color="#6FE3D8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="48" height="48" rx="12.5" fill="url(#kgBg)"/>
+  <rect x="1" y="1" width="46" height="46" rx="11.5" stroke="#fff" stroke-opacity=".14"/>
+  <path d="M0 12.5C0 5.6 5.6 0 12.5 0h23C42.4 0 48 5.6 48 12.5V17C40 8.8 26 4.6 0 15.5v-3Z" fill="url(#kgSheen)"/>
+  <path d="M24 8.6 36.4 14v10.3c0 7-5 12-12.4 13.9C16.6 36.3 11.6 31.3 11.6 24.3V14L24 8.6Z"
+        stroke="url(#kgShield)" stroke-width="2.1" stroke-linejoin="round"/>
+  <circle cx="24" cy="19.5" r="7.5" fill="url(#kgGlow)"/>
+  <circle cx="24" cy="19.5" r="2.7" fill="#6FE3D8"/>
+  <circle cx="17.9" cy="28.6" r="2.2" fill="#F2F7FF"/>
+  <circle cx="30.1" cy="28.6" r="2.2" fill="#F2F7FF"/>
+  <path d="M22.6 21.6 18.9 26.7M25.4 21.6 29.1 26.7M20.1 28.6h7.8"
+        stroke="#DCE9FF" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M24 12.2v3.2M16 16l2.6 1.6M32 16l-2.6 1.6" stroke="#8FB7FF" stroke-width="1.3" stroke-linecap="round" opacity=".8"/>
 </svg>"""
 
 BRAND = f"""<a class="brand" href="index.html" aria-label="{SITE_NAME} 홈">
-        {LOGO_SVG}
+        <span class="brand-badge">KAIEC</span>
         <span class="brand-text">
           <span class="brand-ko">{SITE_NAME}</span>
           <span class="brand-en">{SITE_EN}</span>
@@ -74,6 +214,7 @@ def header():
         <span class="topbar-right">
           <a href="mailto:{EMAIL}">{EMAIL}</a><span class="tsep">|</span>
           <a href="apply.html">위원 지원</a><span class="tsep">|</span>
+          <a href="{COPYCLEAN_URL}" target="_blank" rel="noopener" style="color:#6FE3D8">카피클린</a><span class="tsep">|</span>
           <a href="mou.html#inquiry">제휴·MOU 문의</a>
         </span>
       </div>
@@ -82,7 +223,7 @@ def header():
       {BRAND}
       <nav class="nav" id="nav">
           {links}
-          <span class="header-cta"><a class="btn btn-primary btn-sm" href="apply.html">위원 지원</a></span>
+          <span class="header-cta"><a class="btn btn-primary btn-sm" href="apply.html">위원 지원</a><a class="btn btn-teal btn-sm" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">문서 검사</a></span>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
         <i data-lucide="menu"></i>
@@ -123,11 +264,6 @@ def footer():
           </ul>
         </div>
       </div>
-      <div class="footer-disclaimer">
-        본 위원회는 AI 윤리 문화 확산을 목적으로 활동하는 <strong>민간 자율 기구</strong>이며, 정부기관·공공기관이 아닙니다.
-        위원회가 발급하는 위촉장 및 활동증명서는 위원회 자체 활동에 대한 확인 문서로, 국가가 인정하는 자격·면허·인증이 아닙니다.
-        「카피클린(CopyClean)」은 위원회와 협력하는 <strong>별도의 제휴 서비스</strong>이며 위원회의 소속 기관이 아닙니다.
-      </div>
       <div class="footer-bottom">
         <span>© <span id="year">2026</span> {SITE_NAME} (Korea AI Ethics Committee). All rights reserved.</span>
         <span>문의 {EMAIL}</span>
@@ -136,9 +272,11 @@ def footer():
   </footer>"""
 
 
-def page(filename, title, desc, body, extra_head="", extra_script=""):
+def page(filename, title, desc, body, extra_head="", extra_script="", keywords=None, og_image=None):
     canonical = f"{SITE_URL}/{filename}" if filename != "index.html" else f"{SITE_URL}/"
     full_title = title if filename == "index.html" else f"{title} | {SITE_NAME}"
+    kw = ", ".join(keywords) if keywords else "AI윤리, 인공지능 윤리, 한국AI윤리위원회, 생성형 AI, AI 윤리 파트너, AI 윤리 교육, 카피클린, AI 활용 점검"
+    ogimg = og_image or f"{SITE_URL}/assets/img/og-image.png"
     html = f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -146,7 +284,7 @@ def page(filename, title, desc, body, extra_head="", extra_script=""):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{full_title}</title>
 <meta name="description" content="{desc}">
-<meta name="keywords" content="AI윤리, 인공지능 윤리, 한국AI윤리위원회, 생성형 AI, AI 윤리 파트너, AI 윤리 교육, 카피클린, AI 활용 점검">
+<meta name="keywords" content="{kw}">
 <meta name="author" content="{SITE_NAME}">
 <link rel="canonical" href="{canonical}">
 <meta name="robots" content="index, follow">
@@ -158,12 +296,15 @@ def page(filename, title, desc, body, extra_head="", extra_script=""):
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="{SITE_URL}/assets/img/og-image.png">
+<meta property="og:image" content="{ogimg}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>document.documentElement.className+=' js';</script>
 {extra_head}</head>
@@ -237,7 +378,7 @@ CHARTER = [
 
 
 # ---------------------------------------------------------------- index.html
-def build_index():
+def build_index(posts):
     biz_cards = "\n".join(f"""        <article class="card reveal">
           <div class="card-icon"><i data-lucide="{ic}"></i></div>
           <h3>{t}</h3>
@@ -258,7 +399,9 @@ def build_index():
            교육·연구·캠페인·대외협력 활동을 수행합니다.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="about.html">위원회 소개 <i data-lucide="arrow-right"></i></a>
-          <a class="btn btn-light" href="partner.html">AI 윤리 파트너 참여</a>
+          <a class="btn btn-light" href="lecture.html">교육·강사 파견 <i data-lucide="arrow-right"></i></a>
+          <a class="btn btn-light" href="partner.html">AI 윤리 파트너 참여 <i data-lucide="arrow-right"></i></a>
+          <a class="btn btn-teal" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">카피클린 문서검사 <i data-lucide="external-link"></i></a>
         </div>
       </div>
     </section>
@@ -347,11 +490,14 @@ def build_index():
             <p class="lead" style="margin-bottom:18px">
               위원회는 카피클린과 함께 <strong>AI 활용 문서의 사전점검</strong>과
               <strong>책임 있는 AI 활용 문화 확산</strong>을 위한 캠페인·제휴 활동을 진행합니다.</p>
-            <div class="notice notice--gray" style="margin-bottom:24px">
-              한국AI윤리위원회는 AI 윤리 문화 확산 및 관련 활동을 수행하는 민간 자율 기구이며,
-              「카피클린」은 위원회와 협력하는 <strong>AI 문서 분석 제휴 서비스</strong>입니다. 두 주체는 서로 별개입니다.
+            <div class="notice notice--teal" style="margin-bottom:24px">
+              위원회가 <strong>윤리 기준과 캠페인</strong>을, 카피클린이 <strong>AI 문서 분석 기술</strong>을 맡아
+              "제출 전에 스스로 확인하는 문화"를 함께 만들어갑니다.
             </div>
-            <a class="btn btn-ghost" href="copyclean.html">제휴 내용 자세히 보기 <i data-lucide="arrow-right"></i></a>
+            <div style="display:flex;gap:11px;flex-wrap:wrap">
+              <a class="btn btn-teal" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">카피클린 바로가기 <i data-lucide="external-link"></i></a>
+              <a class="btn btn-ghost" href="copyclean.html">제휴 내용 자세히 보기 <i data-lucide="arrow-right"></i></a>
+            </div>
           </div>
         </div>
       </div>
@@ -366,7 +512,9 @@ def build_index():
           </div>
           <a class="btn btn-ghost btn-sm" href="news.html">전체 보기 <i data-lucide="arrow-right"></i></a>
         </div>
-        <div class="news-list" id="homeNews"></div>
+        <div class="board-grid">
+{chr(10).join(board_card(p) for p in posts[:3])}
+        </div>
       </div>
     </section>
 
@@ -386,26 +534,10 @@ def build_index():
       </div>
     </section>"""
 
-    script = """  <script src="assets/js/news-data.js"></script>
-  <script>
-  (function(){
-    var box=document.getElementById('homeNews');
-    if(!box||!window.KAIEC_NEWS)return;
-    box.innerHTML=window.KAIEC_NEWS.slice(0,3).map(function(n){
-      return '<article class="news-item reveal">'
-        +'<div class="news-date">'+n.date+'</div>'
-        +'<div class="news-body"><h3>'+n.title+'</h3><p>'+n.summary+'</p>'
-        +'<div class="news-meta"><span class="badge '+(n.category==='캠페인'?'badge--teal':'')+'">'+n.category+'</span></div>'
-        +'</div></article>';
-    }).join('');
-    document.querySelectorAll('#homeNews .reveal').forEach(function(e){e.classList.add('is-in')});
-  })();
-  </script>
-"""
     page("index.html",
          f"{SITE_NAME} | 책임 있는 AI 활용과 AI 윤리 문화 확산",
          "한국AI윤리위원회는 생성형 AI 시대의 책임 있는 AI 활용과 건전한 AI 윤리 문화 확산을 위해 교육·연구·캠페인·대외협력 및 AI 윤리 파트너 활동을 추진하는 민간 자율 위원회입니다.",
-         body, extra_script=script)
+         body)
 
 
 # ---------------------------------------------------------------- about.html
@@ -549,7 +681,7 @@ def build_about():
               <table class="tbl" style="min-width:auto">
                 <tbody>
                   <tr><th style="width:34%">명칭</th><td>한국AI윤리위원회<br><span style="color:var(--gray-500);font-size:13.5px">Korea AI Ethics Committee (KAIEC)</span></td></tr>
-                  <tr><th>성격</th><td>민간 자율 기구 (정부·공공기관 아님)</td></tr>
+                  <tr><th>성격</th><td>민간 전문 위원회</td></tr>
                   <tr><th>목적</th><td>책임 있는 생성형 AI 활용 및 AI 윤리 문화 확산</td></tr>
                   <tr><th>주요 활동</th><td>교육 · 연구 · 캠페인 · 대외협력 · AI 윤리 파트너 운영</td></tr>
                   <tr><th>운영 방식</th><td>온라인 기반 (위원·파트너 활동 재택 가능)</td></tr>
@@ -557,9 +689,8 @@ def build_about():
                 </tbody>
               </table>
             </div>
-            <div class="notice notice--gray" style="margin-top:22px">
-              위원회는 정부기관·공공기관이 아니며, 국가공인 자격이나 인증을 부여하지 않습니다.
-              위촉장 및 활동증명서는 위원회 자체 활동에 대한 확인 문서입니다.
+            <div class="notice notice--teal" style="margin-top:22px">
+              위원회 활동에 관한 문의는 언제든 환영합니다. 대표 메일로 보내주시면 담당자가 신속히 회신드립니다.
             </div>
           </div>
         </div>
@@ -599,12 +730,9 @@ def build_about():
   })();
   </script>
 """
-    head = """<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700;800&display=swap" rel="stylesheet">
-"""
     page("about.html", "위원회 소개",
          "한국AI윤리위원회 위원장 인사말, 설립 취지, 미션과 비전, 4대 핵심가치, AI 윤리 실천 헌장 7개 조항과 위원회 개요를 안내합니다.",
-         body, extra_head=head, extra_script=script)
+         body, extra_script=script)
 
 
 # ------------------------------------------------------------- business.html
@@ -921,7 +1049,7 @@ def build_partner():
         ("활동은 어디에서 하나요? 정해진 근무 시간이 있나요?",
          "모든 활동은 온라인·재택으로 진행되며 정해진 출근 시간이나 장소가 없습니다. 각자의 일정에 맞춰 배정된 활동을 수행하시면 됩니다."),
         ("위촉장과 활동증명서는 어떤 문서인가요?",
-         "위원회가 파트너의 위촉 사실과 활동 내역을 확인해 발급하는 문서입니다. 위원회 자체 활동에 대한 확인 문서이며, 국가가 인정하는 자격증이나 공인 인증이 아닙니다. 이 점을 명확히 안내드립니다."),
+         "위원회가 파트너의 위촉 사실과 활동 내역을 확인해 위원회 명의로 발급하는 문서입니다. 대외활동 이력서나 포트폴리오의 증빙 자료로 활용하실 수 있습니다."),
         ("인센티브는 어떤 기준으로 지급되나요?",
          "활동 실적(캠페인 참여, 콘텐츠 제작, 제휴 캠페인 기여 등)을 기준으로 산정합니다. 구체적인 기준과 지급 방식은 위촉 시 개별 안내드립니다."),
         ("활동 기간은 어떻게 되나요?",
@@ -1030,8 +1158,8 @@ def build_partner():
           </div>
         </div>
         <div class="footer-disclaimer" style="margin-top:26px">
-          위촉장 및 활동증명서는 위원회 자체 활동에 대한 확인 문서이며, 국가공인 자격·인증이 아닙니다.
           인센티브의 구체적 기준과 지급 방식은 위촉 시 개별 안내드립니다.
+          위촉장·활동증명서는 요청 시 즉시 발급해 드립니다.
         </div>
       </div>
     </section>
@@ -1099,9 +1227,9 @@ def build_copyclean():
     <section class="section">
       <div class="wrap">
         <div class="notice" style="margin-bottom:48px">
-          <strong>관계 안내 —</strong> 한국AI윤리위원회는 AI 윤리 문화 확산 및 관련 활동을 수행하는 민간 자율 기구이며,
-          「카피클린(CopyClean)」은 위원회와 협력하는 <strong>AI 문서 분석 제휴 서비스</strong>입니다.
-          두 주체는 서로 별개이며, 카피클린은 위원회의 소속 기관이 아닙니다.
+          <strong>파트너십 —</strong> 한국AI윤리위원회와 「카피클린(CopyClean)」은
+          AI 활용 문서의 <strong>사전점검 문화 확산</strong>을 위해 협력하는 파트너입니다.
+          위원회는 윤리 기준·캠페인·교육을, 카피클린은 AI 문서 분석 기술을 담당합니다.
         </div>
 
         <div class="split">
@@ -1112,10 +1240,11 @@ def build_copyclean():
               논문 · 과제 · 보고서 · 자기소개서 등 다양한 문서를 대상으로
               <strong>AI 활용 여부를 사전에 확인</strong>할 수 있도록 지원하는 AI 문서 분석 서비스입니다.
             </p>
-            <p style="font-size:16px;color:var(--gray-600);line-height:1.8">
+            <p style="font-size:16px;color:var(--gray-600);line-height:1.8;margin-bottom:24px">
               제출하기 전에 스스로 확인해 볼 수 있다는 점이 핵심입니다.
               문제를 사후에 지적하는 것이 아니라, 사전에 점검해 불필요한 오해와 분쟁을 예방하는 데 목적이 있습니다.
             </p>
+            <a class="btn btn-teal" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">카피클린 공식 사이트 바로가기 <i data-lucide="external-link"></i></a>
           </div>
           <div class="split-visual reveal" style="background:linear-gradient(150deg,#0A1628,#00857A)">
             <div class="card-icon" style="background:rgba(255,255,255,.15);color:#fff;width:56px;height:56px">
@@ -1124,6 +1253,7 @@ def build_copyclean():
             <h3 style="font-size:25px;letter-spacing:-.035em">제출 전에<br>스스로 확인하는 습관</h3>
             <p style="color:#CDE9E5;font-size:15px;line-height:1.8">
               논문 · 과제 · 보고서 · 자기소개서<br>다양한 문서의 AI 활용 여부 사전 확인</p>
+            <a class="btn btn-white btn-sm" href="{COPYCLEAN_URL}" target="_blank" rel="noopener" style="align-self:flex-start">skkc.co.kr <i data-lucide="external-link"></i></a>
           </div>
         </div>
       </div>
@@ -1172,6 +1302,20 @@ def build_copyclean():
       </div>
     </section>
 
+    <section class="section section--tight">
+      <div class="wrap">
+        <div class="cta-band reveal" style="background:linear-gradient(140deg,#03231F,#00857A)">
+          <div>
+            <h2>제출 전, 카피클린에서 직접 확인해 보세요</h2>
+            <p style="color:#BFE8E3">논문 · 과제 · 보고서 · 자기소개서의 AI 활용 여부를 제출 전에 스스로 점검할 수 있습니다.</p>
+          </div>
+          <div class="btns">
+            <a class="btn btn-white" href="{COPYCLEAN_URL}" target="_blank" rel="noopener">카피클린 바로가기 <i data-lucide="external-link"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="wrap-narrow">
         <div class="center" style="margin-bottom:34px">
@@ -1187,14 +1331,14 @@ def build_copyclean():
             <tbody>
               <tr><th>성격</th><td>민간 자율 위원회</td><td>AI 문서 분석 서비스</td></tr>
               <tr><th>역할</th><td>AI 윤리 문화 확산, 교육·연구·캠페인, 대외협력</td><td>문서의 AI 활용 여부 사전 확인 지원</td></tr>
-              <tr><th>관계</th><td colspan="2" style="text-align:center;font-weight:700;color:var(--blue)">캠페인·제휴 활동을 함께하는 협력 관계 (소속 관계 아님)</td></tr>
+              <tr><th>관계</th><td colspan="2" style="text-align:center;font-weight:700;color:var(--blue)">캠페인·제휴 활동을 함께하는 협력 파트너</td></tr>
               <tr><th>대상</th><td>개인 · 대학 · 기업 · 협회 등</td><td>논문 · 과제 · 보고서 · 자기소개서 등 문서</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="notice notice--gray" style="margin-top:24px">
-          위원회는 카피클린을 포함한 어떤 서비스에 대해서도 국가공인 인증이나 자격을 부여하지 않습니다.
-          제휴는 AI 윤리 문화 확산이라는 공동의 목적에 따른 협력 활동입니다.
+        <div class="notice notice--teal" style="margin-top:24px">
+          두 파트너는 "제출 전에 스스로 확인하는 문화"라는 공동의 목표 아래
+          캠페인 · 교육 · 가이드라인 개발을 함께 진행하고 있습니다.
         </div>
       </div>
     </section>
@@ -1218,54 +1362,41 @@ def build_copyclean():
 
 
 # ----------------------------------------------------------------- news.html
-def build_news():
+def build_news(posts):
+    cat_btns = '<button class="btn btn-sm btn-primary" data-cat="전체">전체</button>' + "".join(
+        f'<button class="btn btn-sm btn-ghost" data-cat="{c}">{c}</button>' for c in CATEGORIES)
+    cards = "\n".join(board_card(p) for p in posts) if posts else \
+        '<p style="text-align:center;color:var(--gray-500);padding:50px 0">등록된 소식이 없습니다.</p>'
+
     body = hero_sub("캠페인 · 소식",
-                    "위원회의 캠페인, 활동 소식, 공지사항을 안내합니다.",
-                    "캠페인 · 소식") + """
+                    "위원회의 캠페인, 활동 소식, 공지사항과 AI 윤리 이슈를 전합니다.",
+                    "캠페인 · 소식") + f"""
 
     <section class="section">
       <div class="wrap">
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px" id="newsFilter">
-          <button class="btn btn-sm btn-primary" data-cat="전체">전체</button>
-          <button class="btn btn-sm btn-ghost" data-cat="공지">공지</button>
-          <button class="btn btn-sm btn-ghost" data-cat="캠페인">캠페인</button>
-          <button class="btn btn-sm btn-ghost" data-cat="활동">활동</button>
-          <button class="btn btn-sm btn-ghost" data-cat="연구·정책">연구·정책</button>
+          {cat_btns}
         </div>
-        <div class="news-list" id="newsList"></div>
-
-        <div class="notice notice--gray" style="margin-top:34px">
-          <strong>소식 추가 방법 —</strong> <code>assets/js/news-data.js</code> 파일의 배열 맨 앞에 항목을 추가하면
-          이 페이지와 홈 화면에 자동으로 반영됩니다.
+        <div class="board-grid" id="boardGrid">
+{cards}
         </div>
       </div>
     </section>"""
 
-    script = """  <script src="assets/js/news-data.js"></script>
-  <script>
+    script = """  <script>
+  /* 분류 필터 — 게시글 자체는 정적 HTML이라 검색엔진이 전부 읽습니다 */
   (function(){
-    var box=document.getElementById('newsList');
     var filter=document.getElementById('newsFilter');
-    if(!box||!window.KAIEC_NEWS)return;
-    function render(cat){
-      var list=cat==='전체'?window.KAIEC_NEWS:window.KAIEC_NEWS.filter(function(n){return n.category===cat});
-      if(!list.length){box.innerHTML='<p style="text-align:center;color:var(--gray-500);padding:50px 0">등록된 소식이 없습니다.</p>';return}
-      box.innerHTML=list.map(function(n){
-        var cls=n.category==='캠페인'?'badge--teal':(n.category==='공지'?'':'badge--gray');
-        return '<article class="news-item">'
-          +'<div class="news-date">'+n.date+'</div>'
-          +'<div class="news-body"><h3>'+n.title+'</h3><p>'+n.summary+'</p>'
-          +'<div class="news-meta"><span class="badge '+cls+'">'+n.category+'</span>'
-          +(n.link?'<a href="'+n.link+'" style="font-size:13.5px;font-weight:700;color:var(--blue)">자세히 보기 →</a>':'')
-          +'</div></div></article>';
-      }).join('');
-    }
-    render('전체');
+    var cards=document.querySelectorAll('#boardGrid .board-card');
+    if(!filter)return;
     filter.addEventListener('click',function(e){
       var b=e.target.closest('button[data-cat]');if(!b)return;
       filter.querySelectorAll('button').forEach(function(x){x.className='btn btn-sm btn-ghost'});
       b.className='btn btn-sm btn-primary';
-      render(b.getAttribute('data-cat'));
+      var cat=b.getAttribute('data-cat');
+      cards.forEach(function(c){
+        c.style.display=(cat==='전체'||c.getAttribute('data-cat')===cat)?'':'none';
+      });
     });
   })();
   </script>
@@ -1273,6 +1404,142 @@ def build_news():
     page("news.html", "캠페인 · 소식",
          "한국AI윤리위원회의 AI 윤리 캠페인, 활동 소식, 공지사항, 연구·정책 이슈를 안내합니다.",
          body, extra_script=script)
+
+
+# ------------------------------------------------------------- 게시글 페이지
+def build_post(p, posts):
+    idx = posts.index(p)
+    prev_p = posts[idx + 1] if idx + 1 < len(posts) else None   # 이전 글(더 오래된 글)
+    next_p = posts[idx - 1] if idx > 0 else None                # 다음 글(더 새 글)
+
+    cover = ""
+    ogimg = None
+    if p["image"]:
+        cover = f'''        <div class="post-cover"><img src="assets/img/posts/{p["image"]}" alt="{_html.escape(p["title"])}"></div>\n'''
+        ogimg = f'{SITE_URL}/assets/img/posts/{p["image"]}'
+
+    tags = "".join(f'<span class="chip">#{k}</span>' for k in p["keywords"])
+    badge = 'badge--teal' if p["category"] == '캠페인' else ''
+
+    nav_html = '<div class="post-nav">'
+    nav_html += (f'<a class="btn btn-ghost btn-sm" href="{prev_p["file"]}"><i data-lucide="arrow-left"></i> 이전 글</a>'
+                 if prev_p else '<span></span>')
+    nav_html += '<a class="btn btn-primary btn-sm" href="news.html">목록으로</a>'
+    nav_html += (f'<a class="btn btn-ghost btn-sm" href="{next_p["file"]}">다음 글 <i data-lucide="arrow-right"></i></a>'
+                 if next_p else '<span></span>')
+    nav_html += '</div>'
+
+    body = f"""    <section class="page-hero">
+      <div class="wrap page-hero-inner" style="max-width:var(--wrap)">
+        <p class="crumb"><a href="index.html">홈</a> &nbsp;›&nbsp; <a href="news.html" style="color:inherit">캠페인 · 소식</a></p>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span class="badge {badge}">{p["category"]}</span>
+          <span style="font-size:13.5px;color:#7E9AC0;font-weight:600">{p["date"]}</span>
+        </div>
+        <h1 style="max-width:820px">{p["title"]}</h1>
+        <p>{p["summary"]}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="post-wrap">
+{cover}        <article class="post-body">
+{md_to_html(p["body"])}
+        </article>
+        <div class="post-tags">{tags}</div>
+{nav_html}
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="wrap">
+        <div class="cta-band">
+          <div><h2>한국AI윤리위원회와 함께하세요</h2>
+            <p>위원 · AI 윤리 파트너 모집, 강의·교육 신청, 기관 제휴 문의를 환영합니다.</p></div>
+          <div class="btns">
+            <a class="btn btn-white" href="apply.html">위원 지원</a>
+            <a class="btn btn-light" href="lecture.html">강의 신청</a>
+          </div>
+        </div>
+      </div>
+    </section>"""
+
+    iso_date = p["dt"].strftime("%Y-%m-%d")
+    ld = f"""<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": {_json_str(p["title"])},
+  "description": {_json_str(p["summary"])},
+  "datePublished": "{iso_date}",
+  "dateModified": "{iso_date}",
+  "keywords": {_json_str(", ".join(p["keywords"]))},
+  {'"image": ["' + ogimg + '"],' if ogimg else ''}
+  "author": {{"@type": "Organization", "name": "{SITE_NAME}", "url": "{SITE_URL}"}},
+  "publisher": {{"@type": "Organization", "name": "{SITE_NAME}"}},
+  "mainEntityOfPage": "{SITE_URL}/{p["file"]}"
+}}
+</script>
+"""
+    page(p["file"], p["title"],
+         (p["summary"] or p["title"])[:150],
+         body, extra_head=ld,
+         keywords=p["keywords"] or None, og_image=ogimg)
+
+
+def _json_str(s):
+    import json
+    return json.dumps(s, ensure_ascii=False)
+
+
+# --------------------------------------------------------- sitemap.xml / rss
+def build_sitemap(posts):
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    core = [("", "1.0", "weekly"), ("about.html", "0.9", "monthly"), ("business.html", "0.9", "monthly"),
+            ("members.html", "0.8", "monthly"), ("lecture.html", "0.9", "monthly"),
+            ("partner.html", "0.9", "monthly"), ("copyclean.html", "0.8", "monthly"),
+            ("news.html", "0.8", "daily"), ("mou.html", "0.8", "monthly"), ("apply.html", "0.9", "monthly")]
+    urls = []
+    for path, pri, freq in core:
+        loc = f"{SITE_URL}/{path}" if path else f"{SITE_URL}/"
+        urls.append(f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{today}</lastmod>\n"
+                    f"    <changefreq>{freq}</changefreq>\n    <priority>{pri}</priority>\n  </url>")
+    for p in posts:
+        urls.append(f"  <url>\n    <loc>{SITE_URL}/{p['file']}</loc>\n    <lastmod>{p['dt'].strftime('%Y-%m-%d')}</lastmod>\n"
+                    f"    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>")
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + "\n".join(urls) + "\n</urlset>\n")
+    io.open(os.path.join(BASE, "sitemap.xml"), "w", encoding="utf-8").write(xml)
+    print("  ✓ sitemap.xml (게시글 포함 자동 생성)")
+
+
+def build_rss(posts):
+    items = []
+    for p in posts[:20]:
+        pub = p["dt"].strftime("%a, %d %b %Y 09:00:00 +0900")
+        desc = _html.escape(p["summary"])
+        items.append(f"""    <item>
+      <title>{_html.escape(p["title"])}</title>
+      <link>{SITE_URL}/{p["file"]}</link>
+      <guid>{SITE_URL}/{p["file"]}</guid>
+      <pubDate>{pub}</pubDate>
+      <category>{_html.escape(p["category"])}</category>
+      <description>{desc}</description>
+    </item>""")
+    rss = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{SITE_NAME} 소식</title>
+    <link>{SITE_URL}</link>
+    <description>한국AI윤리위원회의 캠페인, 활동 소식, AI 윤리 이슈</description>
+    <language>ko</language>
+{chr(10).join(items)}
+  </channel>
+</rss>
+"""
+    io.open(os.path.join(BASE, "rss.xml"), "w", encoding="utf-8").write(rss)
+    print("  ✓ rss.xml (네이버 서치어드바이저 RSS 제출용)")
 
 
 # ------------------------------------------------------------------ mou.html
@@ -1519,10 +1786,10 @@ def build_lecture():
           <article class="card reveal"><div class="card-icon"><i data-lucide="users"></i></div>
             <h3>학회 · 협회 · 단체</h3><p>학술대회 초청 강연, 회원 대상 세미나, 공동 교육 프로그램</p></article>
         </div>
-        <div class="notice notice--gray" style="margin-top:28px">
-          정부·지자체·공공기관이 주관하는 교육 및 정부지원사업 연계 프로그램 출강은
-          해당 <strong>주관 기관과의 협의에 따라</strong> 진행됩니다. 위원회는 민간 자율 기구로서
-          교육 콘텐츠와 강사진을 제공하는 역할을 담당합니다.
+        <div class="notice" style="margin-top:28px">
+          <strong>공공·정부 연계 프로그램 —</strong> 정부·지자체·공공기관 주관 교육과
+          정부지원사업 연계 프로그램은 주관 기관과의 협의를 통해
+          일정 · 내용 · 증빙 서류를 맞춤으로 준비해 드립니다.
         </div>
       </div>
     </section>
@@ -1817,10 +2084,9 @@ def build_apply():
 
     <section class="section section--gray section--tight">
       <div class="wrap-narrow">
-        <div class="notice notice--gray">
-          <strong>안내 —</strong> 한국AI윤리위원회는 민간 자율 기구로서 정부기관·공공기관이 아니며,
-          국가공인 자격이나 인증을 부여하지 않습니다. 위촉장 및 활동증명서는 위원회 자체 활동에 대한 확인 문서입니다.
-          위원·파트너 지원 과정에서 가입비, 교육비 등 어떠한 비용도 요구하지 않습니다.
+        <div class="notice notice--teal">
+          <strong>안내 —</strong> 위원·파트너 지원과 활동 과정에서 가입비, 교육비 등
+          어떠한 비용도 요구하지 않습니다. 지원서 검토 결과는 개별적으로 안내드립니다.
         </div>
       </div>
     </section>"""
@@ -1832,14 +2098,20 @@ def build_apply():
 
 if __name__ == "__main__":
     print("한국AI윤리위원회 사이트 빌드 중...")
-    build_index()
+    posts = load_posts()
+    print(f"  게시글 {len(posts)}건 발견")
+    build_index(posts)
     build_about()
     build_business()
     build_members()
     build_lecture()
     build_partner()
     build_copyclean()
-    build_news()
+    build_news(posts)
     build_mou()
     build_apply()
+    for p in posts:
+        build_post(p, posts)
+    build_sitemap(posts)
+    build_rss(posts)
     print("완료!")
