@@ -41,7 +41,7 @@ COPYCLEAN_URL = "https://skkc.co.kr/shop_view?idx=6"
 #  - 파일명이 곧 주소가 됩니다: posts-src/2026-08-17-open.md → post-2026-08-17-open.html
 #  - 작성법은 posts-src/_작성방법.txt 참고
 # =============================================================================
-CATEGORIES = ["공지", "캠페인", "활동", "연구·정책"]
+CATEGORIES = ["공지", "칼럼", "캠페인", "활동", "연구·정책"]
 
 # 빌드할 때마다 바뀌는 버전 태그 — CSS/JS 주소 뒤에 붙여 방문자 브라우저 캐시를 자동 갱신
 BUILD_V = datetime.datetime.now().strftime("%Y%m%d%H%M")
@@ -163,7 +163,7 @@ NAV = [
     ("lecture.html", "강의 신청"),
     ("partner.html", "AI 윤리 파트너"),
     ("copyclean.html", "카피클린"),
-    ("news.html", "캠페인·소식"),
+    ("news.html", "커뮤니티"),
     ("mou.html", "MOU·대외협력"),
 ]
 
@@ -1329,6 +1329,46 @@ def build_copyclean():
     <section class="section">
       <div class="wrap-narrow">
         <div class="center" style="margin-bottom:34px">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="h-sec">AI 유사도 검사, 자주 묻는 질문</h2>
+        </div>
+        <details class="acc">
+          <summary>AI 유사도 검사란 무엇인가요?</summary>
+          <div class="acc-body">문서의 문장들이 생성형 AI(챗GPT 등)로 작성됐을 가능성을 분석해 <strong>AI 유사도</strong>라는
+            지표로 보여주는 검사입니다. 학위논문·학술지 논문·과제·레포트·자기소개서가 주요 대상입니다.
+            개념이 처음이라면 <a href="post-2026-08-21-ai-similarity-check-guide.html" style="color:var(--blue);font-weight:600">AI 유사도 검사 완전 가이드</a>를 먼저 읽어보세요.</div>
+        </details>
+        <details class="acc">
+          <summary>표절검사와 AI 유사도 검사는 다른 건가요?</summary>
+          <div class="acc-body">다릅니다. 표절검사는 기존 문서와 겹치는 부분을 찾고, AI 유사도 검사는 문장이
+            AI로 생성됐을 가능성을 판정합니다. 그래서 표절검사에 문제가 없어도 AI 유사도는 높게 나올 수 있습니다.
+            제출 문서라면 두 관점 모두 점검하는 것이 안전합니다.</div>
+        </details>
+        <details class="acc">
+          <summary>AI 유사도가 높게 나오면 어떻게 해야 하나요?</summary>
+          <div class="acc-body">자동 변환 도구로 낮추는 방식은 권하지 않습니다. 카피클린의 AI 유사도 상세리포트로
+            어느 문장이 판정됐는지 확인한 뒤, 해당 부분을 <strong>본인의 언어로 다시 쓰고 재검사</strong>하는 것이
+            가장 안전하고 확실한 방법입니다. 자세한 순서는
+            <a href="post-2026-08-20-lower-ai-similarity.html" style="color:var(--blue);font-weight:600">올바른 대응 가이드</a>에 정리되어 있습니다.</div>
+        </details>
+        <details class="acc">
+          <summary>어떤 문서를 검사할 수 있나요?</summary>
+          <div class="acc-body">학위논문, 학술지 논문, 과제·레포트, 자기소개서를 검사할 수 있습니다.
+            논문 심사 전, 과제 제출 전, 채용 서류 마감 전 등 <strong>제출 직전 단계</strong>에서 이용하는 것이 가장 효과적입니다.
+            이용 순서는 <a href="post-2026-08-07-copyclean-precheck-guide.html" style="color:var(--blue);font-weight:600">카피클린 이용 가이드</a>를 참고하세요.</div>
+        </details>
+        <details class="acc">
+          <summary>AI를 쓰지 않았는데도 검사가 필요한가요?</summary>
+          <div class="acc-body">AI 탐지는 확률 판정이라 직접 쓴 글이 판정되는 경우도 드물게 있습니다.
+            제출 전 검사 결과를 보관해 두면 오해가 생겼을 때 <strong>소명 자료</strong>가 됩니다.
+            억울한 판정에 대한 대응법은 <a href="post-2026-08-16-false-positive-response.html" style="color:var(--blue);font-weight:600">별도 칼럼</a>에서 다룹니다.</div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section section--gray">
+      <div class="wrap-narrow">
+        <div class="center" style="margin-bottom:34px">
           <span class="eyebrow">Roles</span>
           <h2 class="h-sec">역할 구분</h2>
           <p class="h-sub">두 주체의 역할을 명확히 구분해 안내드립니다.</p>
@@ -1366,9 +1406,11 @@ def build_copyclean():
       </div>
     </section>"""
 
-    page("copyclean.html", "카피클린 제휴",
-         "한국AI윤리위원회의 제휴 서비스 「카피클린(CopyClean)」은 논문·과제·보고서·자기소개서 등의 AI 활용 여부를 사전에 확인할 수 있도록 지원하는 AI 문서 분석 서비스입니다. 위원회는 카피클린과 사전점검 캠페인을 함께 진행합니다.",
-         body)
+    page("copyclean.html", "카피클린 — AI 유사도 검사",
+         "카피클린(CopyClean)은 학위논문·과제·레포트·자기소개서의 AI 유사도 검사와 문장 단위 상세리포트를 제공하는 AI 문서 분석 서비스입니다. 한국AI윤리위원회와 제출 전 사전점검 캠페인을 함께 진행합니다.",
+         body,
+         keywords=["카피클린", "AI 유사도 검사", "AI 유사도", "AI 검사기", "논문 AI 검사", "과제 AI 검사",
+                   "자소서 AI 검사", "챗GPT 검사", "AI 유사도 상세리포트", "논문컨설팅", "AI 사전점검"])
 
 
 # ----------------------------------------------------------------- news.html
@@ -1378,9 +1420,9 @@ def build_news(posts):
     cards = "\n".join(board_card(p) for p in posts) if posts else \
         '<p style="text-align:center;color:var(--gray-500);padding:50px 0">등록된 소식이 없습니다.</p>'
 
-    body = hero_sub("캠페인 · 소식",
-                    "위원회의 캠페인, 활동 소식, 공지사항과 AI 윤리 이슈를 전합니다.",
-                    "캠페인 · 소식") + f"""
+    body = hero_sub("커뮤니티",
+                    "AI 윤리 · AI 유사도 검사 · 연구윤리에 대한 전문가 칼럼과 위원회 소식을 전합니다.",
+                    "커뮤니티") + f"""
 
     <section class="section">
       <div class="wrap">
@@ -1411,9 +1453,11 @@ def build_news(posts):
   })();
   </script>
 """
-    page("news.html", "캠페인 · 소식",
-         "한국AI윤리위원회의 AI 윤리 캠페인, 활동 소식, 공지사항, 연구·정책 이슈를 안내합니다.",
-         body, extra_script=script)
+    page("news.html", "커뮤니티",
+         "AI 유사도 검사, AI 검사기 원리, 논문컨설팅과 연구윤리, 과제·자소서 AI 활용까지 — 한국AI윤리위원회 전문가 칼럼과 캠페인 소식을 전합니다.",
+         body, extra_script=script,
+         keywords=["AI 유사도 검사", "AI 유사도", "AI 검사기", "논문컨설팅", "논문 컨설팅", "카피클린",
+                   "AI 탐지", "논문 AI 검사", "과제 AI 검사", "자소서 AI 검사"])
 
 
 # ------------------------------------------------------------- 게시글 페이지
@@ -1441,7 +1485,7 @@ def build_post(p, posts):
 
     body = f"""    <section class="page-hero">
       <div class="wrap page-hero-inner" style="max-width:var(--wrap)">
-        <p class="crumb"><a href="index.html">홈</a> &nbsp;›&nbsp; <a href="news.html" style="color:inherit">캠페인 · 소식</a></p>
+        <p class="crumb"><a href="index.html">홈</a> &nbsp;›&nbsp; <a href="news.html" style="color:inherit">커뮤니티</a></p>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
           <span class="badge {badge}">{p["category"]}</span>
           <span style="font-size:13.5px;color:#7E9AC0;font-weight:600">{p["date"]}</span>

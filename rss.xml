@@ -6,6 +6,38 @@
     <description>한국AI윤리위원회의 캠페인, 활동 소식, AI 윤리 이슈</description>
     <language>ko</language>
     <item>
+      <title>AI 유사도 검사란? 표절검사와 무엇이 다른지 완전 정리 (2026 가이드)</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-21-ai-similarity-check-guide.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-21-ai-similarity-check-guide.html</guid>
+      <pubDate>Fri, 21 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>AI 유사도 검사는 문서가 생성형 AI로 작성됐는지 확인하는 검사입니다. 기존 표절검사와 어떻게 다른지, 왜 대학과 기업이 도입하는지, 제출 전에 무엇을 확인해야 하는지 한 번에 정리했습니다.</description>
+    </item>
+    <item>
+      <title>AI 유사도 낮추기 전에 반드시 알아야 할 것들 — 올바른 대응 가이드</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-20-lower-ai-similarity.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-20-lower-ai-similarity.html</guid>
+      <pubDate>Thu, 20 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>&quot;AI 유사도 낮추기&quot;를 검색하고 계신가요? 변환 도구부터 찾기 전에, 왜 유사도가 높게 나왔는지와 안전하고 올바른 대응 순서를 먼저 확인하세요. 위원회가 권하는 3단계 대응법을 정리했습니다.</description>
+    </item>
+    <item>
+      <title>AI 탐지 우회 도구의 실체 — 위원회가 사용을 권하지 않는 5가지 이유</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-19-ai-detection-bypass-risk.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-19-ai-detection-bypass-risk.html</guid>
+      <pubDate>Wed, 19 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>&quot;AI 탐지 우회&quot;를 검색하면 수많은 우회 도구 광고가 나옵니다. 한국AI윤리위원회가 이런 도구를 권하지 않는 이유를 기술적·제도적·실리적 관점에서 정리했습니다. 우회보다 빠르고 안전한 길이 있습니다.</description>
+    </item>
+    <item>
+      <title>AI 검사기의 원리 — AI가 쓴 글은 어떻게 탐지되는가</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-18-how-ai-detectors-work.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-18-how-ai-detectors-work.html</guid>
+      <pubDate>Tue, 18 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>AI 검사기는 어떻게 사람 글과 AI 글을 구별할까요? 퍼플렉시티, 버스티니스 등 탐지의 핵심 원리를 비전공자도 이해할 수 있게 풀었습니다. 원리를 알면 왜 &#x27;우회&#x27;가 어려운지도 보입니다.</description>
+    </item>
+    <item>
       <title>한국AI윤리위원회 공식 홈페이지를 열었습니다</title>
       <link>https://kaiec-korea.github.io/post-2026-08-17-website-open.html</link>
       <guid>https://kaiec-korea.github.io/post-2026-08-17-website-open.html</guid>
@@ -28,6 +60,86 @@
       <pubDate>Mon, 17 Aug 2026 09:00:00 +0900</pubDate>
       <category>캠페인</category>
       <description>제휴 서비스 카피클린과 함께 논문·과제·보고서·자기소개서를 제출하기 전 AI 활용 여부를 스스로 점검하는 문화를 확산하는 캠페인을 진행합니다.</description>
+    </item>
+    <item>
+      <title>안 썼는데 AI로 판정됐다면 — 억울한 AI 판정에 대응하는 법</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-16-false-positive-response.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-16-false-positive-response.html</guid>
+      <pubDate>Sun, 16 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>직접 쓴 과제와 논문이 AI로 판정되는 억울한 상황은 실제로 발생합니다. 오탐이 생기는 이유, 소명 자료를 만드는 법, 그리고 애초에 오해를 예방하는 작성 습관을 정리했습니다.</description>
+    </item>
+    <item>
+      <title>논문컨설팅, 어디까지 허용될까 — 연구윤리 기준으로 보는 논문 컨설팅 선택 가이드</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-14-thesis-consulting-ethics.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-14-thesis-consulting-ethics.html</guid>
+      <pubDate>Fri, 14 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>논문컨설팅은 불법일까요, 합법일까요? 허용되는 컨설팅과 연구부정에 해당하는 대필의 경계, 업체를 고를 때 확인해야 할 체크리스트를 연구윤리 관점에서 정리했습니다.</description>
+    </item>
+    <item>
+      <title>대학원생을 위한 논문 AI 활용 표기 가이드 — 어디까지 쓰고, 어떻게 밝힐 것인가</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-12-thesis-ai-citation-guide.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-12-thesis-ai-citation-guide.html</guid>
+      <pubDate>Wed, 12 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>논문에 생성형 AI를 활용했다면 숨기는 것이 아니라 올바르게 표기하는 것이 정답입니다. 단계별 허용 범위의 일반 기준과 실제 표기 문구 예시, 제출 전 점검 순서까지 정리했습니다.</description>
+    </item>
+    <item>
+      <title>자기소개서 AI 검사 시대 — 챗GPT로 쓴 자소서, 기업은 알아볼까</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-10-jaso-ai-check.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-10-jaso-ai-check.html</guid>
+      <pubDate>Mon, 10 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>채용 담당자들이 자기소개서의 AI 작성 여부를 확인하기 시작했습니다. 챗GPT 자소서가 불리해지는 진짜 이유와, AI를 활용하되 서류에서 살아남는 안전한 사용법을 정리했습니다.</description>
+    </item>
+    <item>
+      <title>제출 전 카피클린으로 AI 유사도 사전점검하는 방법 (이용 가이드)</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-07-copyclean-precheck-guide.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-07-copyclean-precheck-guide.html</guid>
+      <pubDate>Fri, 07 Aug 2026 09:00:00 +0900</pubDate>
+      <category>캠페인</category>
+      <description>위원회 제휴 서비스 카피클린으로 논문·과제·자기소개서의 AI 유사도를 제출 전에 확인하는 방법과 상세리포트 읽는 법, 검사 후 해야 할 일까지 순서대로 안내합니다.</description>
+    </item>
+    <item>
+      <title>AI가 만든 가짜 참고문헌 — 논문에서 DOI 검증이 필수가 된 이유</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-05-ai-fake-references.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-05-ai-fake-references.html</guid>
+      <pubDate>Wed, 05 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>챗GPT가 알려준 참고문헌, 실제로 존재하는지 확인하셨나요? AI 환각이 만드는 가짜 문헌의 특징과 3분 만에 하는 DOI 검증법, 심사에서 가짜 문헌이 치명적인 이유를 정리했습니다.</description>
+    </item>
+    <item>
+      <title>과제·레포트 AI 활용 가이드 — 대학생이 안전하게 챗GPT 쓰는 법</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-03-student-report-ai-guide.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-03-student-report-ai-guide.html</guid>
+      <pubDate>Mon, 03 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>&quot;챗GPT로 과제 하면 걸리나요?&quot; 대학생이 가장 많이 하는 질문에 답합니다. 교수들이 AI 과제를 알아보는 방법, 과목별 허용 범위 확인법, 걸리지 않는 법이 아닌 문제없이 쓰는 법을 정리했습니다.</description>
+    </item>
+    <item>
+      <title>학술지 투고 전 AI 검사 — 게재 철회를 부르는 3가지 실수</title>
+      <link>https://kaiec-korea.github.io/post-2026-08-01-journal-submission-ai-check.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-08-01-journal-submission-ai-check.html</guid>
+      <pubDate>Sat, 01 Aug 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>학술지들이 투고 논문의 AI 활용 정책을 강화하고 있습니다. 게재 후 철회로 이어지는 대표적인 실수 3가지와 투고 전 점검 체크리스트를 연구자 관점에서 정리했습니다.</description>
+    </item>
+    <item>
+      <title>AI가 쓴 글의 특징 10가지 — 전문가는 어떻게 구별하는가</title>
+      <link>https://kaiec-korea.github.io/post-2026-07-30-ai-writing-traits.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-07-30-ai-writing-traits.html</guid>
+      <pubDate>Thu, 30 Jul 2026 09:00:00 +0900</pubDate>
+      <category>칼럼</category>
+      <description>검사기 없이도 AI 글은 티가 납니다. 심사자·교수·인사담당자가 실제로 포착하는 AI 문체의 특징 10가지를 정리했습니다. 내 글을 점검하는 체크리스트로도 활용할 수 있습니다.</description>
+    </item>
+    <item>
+      <title>2026 대학가 AI 정책의 방향 — &#x27;금지&#x27;에서 &#x27;표기&#x27;로</title>
+      <link>https://kaiec-korea.github.io/post-2026-07-28-university-ai-policy-2026.html</link>
+      <guid>https://kaiec-korea.github.io/post-2026-07-28-university-ai-policy-2026.html</guid>
+      <pubDate>Tue, 28 Jul 2026 09:00:00 +0900</pubDate>
+      <category>연구·정책</category>
+      <description>생성형 AI에 대한 대학가의 대응이 전면 금지에서 &#x27;조건부 허용과 표기 의무&#x27;로 이동하고 있습니다. 정책 전환의 배경과 학생·연구자가 지금 확인해야 할 것들을 정리했습니다.</description>
     </item>
   </channel>
 </rss>
